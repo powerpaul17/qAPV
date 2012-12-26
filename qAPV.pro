@@ -18,13 +18,17 @@ SOURCES += main.cpp\
     cobject.cpp \
     cdatasource.cpp \
     qprojecttreemodel.cpp \
-    qprojecttreeview.cpp
+    qprojecttreeview.cpp \
+    cfiledatasource.cpp
 
 HEADERS  += wmainwindow.h \
     cproject.h \
     cobject.h \
     cdatasource.h \
     qprojecttreemodel.h \
-    qprojecttreeview.h
+    qprojecttreeview.h \
+    cfiledatasource.h \
+    cdata.h \
+    caudiodata.h
 
 FORMS    += wmainwindow.ui

@@ -1,10 +1,13 @@
 #include "cdatasource.h"
 
-CDataSource::CDataSource() {
-    this->type = DataSourceType;
-    this->name = "DataSource";
+CDataSource::CDataSource(bool isstatic_) {
+    this->isstatic = isstatic_;
 }
 
-CDataSource::~CDataSource() {
+bool CDataSource::getIsStatic() {
+    return this->isstatic;
+}
 
+void CDataSource::setIsStatic(bool isstatic_) {
+    this->isstatic = isstatic_;
 }
