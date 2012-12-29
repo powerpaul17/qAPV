@@ -19,9 +19,8 @@ public:
     int rowCount(const QModelIndex &parent = QModelIndex()) const;
     int columnCount(const QModelIndex &parent = QModelIndex()) const;
 
-
-
 private:
+
     CProject* project;
 };
 

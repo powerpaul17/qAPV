@@ -7,13 +7,14 @@
 
 class CDataSource:public CObject {
     bool isstatic;
+
 public:
     CDataSource(bool isstatic_);
 
     bool getIsStatic();
     void setIsStatic(bool isstatic_);
 
-    virtual QDialog* getSettingsDialog() = 0;
+    virtual QWidget* getSettingsWidget() = 0;
 };
 
 #endif // CDATASOURCE_H

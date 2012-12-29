@@ -8,10 +8,10 @@ QProjectTreeView::~QProjectTreeView() {
 
 }
 
-//void QProjectTreeView::contextMenuEvent(QContextMenuEvent* event_) {
-//
-//}
+void QProjectTreeView::contextMenuEvent(QContextMenuEvent* event_) {
 
-//void QProjectTreeView::itemPressed(const QModelIndex& index_) {
-//
-//}
+}
+
+void QProjectTreeView::itemPressed(const QModelIndex& index_) {
+
+}

@@ -4,6 +4,8 @@
 #include <QMainWindow>
 
 #include "cproject.h"
+#include "qprojecttreemodel.h"
+#include "qprojecttreeview.h"
 
 namespace Ui {
 class WMainWindow;
@@ -15,15 +17,30 @@ class WMainWindow : public QMainWindow
 
     CProject* project;
     
+    QProjectTreeView* treeView;
+    QProjectTreeModel* treeModel;
+
 public:
     explicit WMainWindow(QWidget *parent = 0);
     ~WMainWindow();
 
-    void onMenuFileNewProject();
-    void onMenuFileOpenProject();
+signals:
+
+    void signalProjectClosed(bool a_);
+    void signalProjectOpened(bool a_);
+
+public slots:
+
+    void on_actionNew_project_triggered();
+    void on_actionOpen_project_triggered();
+    void on_actionSave_project_triggered();
+    void on_actionSave_project_as_triggered();
+    void on_actionClose_project_triggered();
     
 private:
     Ui::WMainWindow *ui;
+
+    void closeEvent(QCloseEvent* event);
 };
 
 #endif // WMAINWINDOW_H

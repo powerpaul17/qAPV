@@ -8,9 +8,11 @@ public:
         QProjectTreeView(QWidget* parent_);
         ~QProjectTreeView();
 
-        //void contextMenuEvent(QContextMenuEvent* event_);
+        void contextMenuEvent(QContextMenuEvent* event_);
+
 public Q_SLOTS:
-        //void itemPressed(const QModelIndex& index_);
+
+        void itemPressed(const QModelIndex& index_);
 };
 
 #endif // QPROJECTTREEVIEW_H

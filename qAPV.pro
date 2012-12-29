@@ -19,7 +19,8 @@ SOURCES += main.cpp\
     cdatasource.cpp \
     qprojecttreemodel.cpp \
     qprojecttreeview.cpp \
-    cfiledatasource.cpp
+    cfiledatasource.cpp \
+    cdata.cpp
 
 HEADERS  += wmainwindow.h \
     cproject.h \
