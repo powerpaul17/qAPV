@@ -11,9 +11,6 @@ QAddDataSourceDialog::QAddDataSourceDialog(QWidget *parent) :
 
     newDataSource = 0;
 
-    //layout = findChild<QVBoxLayout*>("verticalLayout");
-
-    //comboBox = findChild<QComboBox*>("comboBox");
     QMapIterator<QString,CreateDataSourceFunc> it = dataSourceFactory.getDataSources();
     it.toFront();
     while(it.hasNext()) {

@@ -23,6 +23,8 @@ public:
     virtual QWidget* getSettingsWidget() = 0;
 
     virtual CData* getData() = 0;
+
+    // virtual CDataSource* CreateDataSource() = 0;
 };
 
 typedef CDataSource* (*CreateDataSourceFunc)(void);

@@ -21,3 +21,15 @@ double CData::getValue(long id_) {
 void CData::appendValue(double value_) {
     data.append(value_);
 }
+
+void CData::deleteValue(long id_) {
+    data.remove(id_);
+}
+
+void CData::insertValue(long id_, double value_) {
+    data.insert(id_,value_);
+}
+
+void CData::clearData() {
+    data.clear();
+}

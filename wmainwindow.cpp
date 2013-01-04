@@ -4,6 +4,7 @@
 #include "wmainwindow.h"
 #include "ui_wmainwindow.h"
 #include "qadddatasourcedialog.h"
+#include "qaddplotdialog.h"
 #include "qplotwindow.h"
 
 WMainWindow::WMainWindow(QWidget *parent) :
@@ -107,7 +108,7 @@ void WMainWindow::on_actionClose_project_triggered() {
 void WMainWindow::on_actionNew_data_source_triggered() {
     if(this->project != 0) {
         QAddDataSourceDialog dialog(this);
-        if(dialog.exec()==QDialog::Accepted) {
+        if(dialog.exec() == QDialog::Accepted) {
             project->addChild(dialog.getDataSource());
             // TODO
             ui->treeView->repaint();
@@ -119,10 +120,14 @@ void WMainWindow::on_actionNew_data_source_triggered() {
 
 void WMainWindow::on_actionNew_plot_triggered() {
     if(this->project != 0) {
-        CPlot* newPlot = new CPlot();
-        project->addChild(newPlot);
-        QWidget* newPlotWindow = new QPlotWindow(newPlot);
-        ui->mdiArea->addSubWindow(newPlotWindow);
+        QAddPlotDialog dialog(this);
+        if(dialog.exec() == QDialog::Accepted) {
+            project->addChild(dialog.getPlot());
+            // TODO
+            ui->treeView->repaint();
+        } else {
+
+        }
     }
 }
 

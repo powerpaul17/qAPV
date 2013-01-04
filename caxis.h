@@ -4,7 +4,11 @@
 #include "cobject.h"
 
 class CAxis:public CObject {
+
+    bool logarithmic;
+
 public:
+
     CAxis();
     ~CAxis();
 
@@ -13,6 +17,9 @@ public:
     CObject* getChild(long id_);
 
     void exportToXML(QDomNode *node_);
+
+    bool isLogarithmic();
+    void setLogarithmic(bool logarithmic_);
 
 };
 

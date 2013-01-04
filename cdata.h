@@ -12,6 +12,9 @@ public:
 
     double getValue(long id_);
     void appendValue(double value_);
+    void deleteValue(long id_);
+    void insertValue(long id_,double value_);
+    void clearData();
 };
 
 #endif // CDATA_H

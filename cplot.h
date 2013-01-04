@@ -3,22 +3,32 @@
 
 #include "cobject.h"
 #include "cdata.h"
+#include "caxis.h"
+
+typedef enum {
+    Plot2D,
+    Plot3D,
+    PlotPolar
+} PlotType;
 
 class CPlot:public CObject {
 
+    int plotType;
+
+protected:
+
     QList<CData*> dataSeries;
+
+    QList<CAxis> axes;
 
 public:
 
-    CPlot();
-    ~CPlot();
+    CPlot(PlotType plotType_);
 
-    bool hasChildren();
-    int getNChildren();
-    CObject* getChild(long id_);
-
-    void exportToXML(QDomNode* node_);
+    virtual QWidget* getSettingsWidget() = 0;
 
 };
+
+typedef CPlot* (*CreatePlotFunc)(void);
 
 #endif // CPLOT_H
