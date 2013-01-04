@@ -4,7 +4,7 @@
 #
 #-------------------------------------------------
 
-QT       += core gui xml
+QT       += core gui xml uitools
 
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 
@@ -20,7 +20,12 @@ SOURCES += main.cpp\
     qprojecttreemodel.cpp \
     qprojecttreeview.cpp \
     cfiledatasource.cpp \
-    cdata.cpp
+    cdata.cpp \
+    qadddatasourcedialog.cpp \
+    cdatasourcefactory.cpp \
+    qplotwindow.cpp \
+    cplot.cpp \
+    caxis.cpp
 
 HEADERS  += wmainwindow.h \
     cproject.h \
@@ -30,6 +35,14 @@ HEADERS  += wmainwindow.h \
     qprojecttreeview.h \
     cfiledatasource.h \
     cdata.h \
-    caudiodata.h
+    caudiodata.h \
+    qadddatasourcedialog.h \
+    cdatasourcefactory.h \
+    qplotwindow.h \
+    cplot.h \
+    caxis.h
 
-FORMS    += wmainwindow.ui
+FORMS    += wmainwindow.ui \
+    qadddatasourcedialog.ui \
+    qplotwindow.ui \
+    cfiledatasource_settings.ui

@@ -90,4 +90,3 @@ QVariant QProjectTreeModel::headerData(int section,Qt::Orientation orientation,i
         return QVariant();
     }
 }
-

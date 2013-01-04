@@ -2,6 +2,7 @@
 #define WMAINWINDOW_H
 
 #include <QMainWindow>
+#include <QMdiArea>
 
 #include "cproject.h"
 #include "qprojecttreemodel.h"
@@ -17,7 +18,6 @@ class WMainWindow : public QMainWindow
 
     CProject* project;
     
-    QProjectTreeView* treeView;
     QProjectTreeModel* treeModel;
 
 public:
@@ -36,6 +36,9 @@ public slots:
     void on_actionSave_project_triggered();
     void on_actionSave_project_as_triggered();
     void on_actionClose_project_triggered();
+
+    void on_actionNew_data_source_triggered();
+    void on_actionNew_plot_triggered();
     
 private:
     Ui::WMainWindow *ui;

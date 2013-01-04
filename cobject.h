@@ -5,9 +5,11 @@
 #include <QtXml/QtXml>
 
 typedef enum {
-    GenericType,
-    ProjectType,
-    DataSourceType
+    Generic,
+    Project,
+    DataSource,
+    Plot,
+    Axis
 } ObjectType;
 
 class CObject {
@@ -18,9 +20,10 @@ protected:
     CObject* parent;
 public:
     CObject();
-    CObject(CObject* parent_,ObjectType type_ = GenericType,long id_ = -1,QString name_ = "Object");
-    ~CObject();
+    CObject(CObject* parent_,ObjectType type_ = Generic,long id_ = -1,QString name_ = "Object");
+    virtual ~CObject();
 
+    void setId(long id_);
     long getId();
     void setName(QString name_);
     QString getName();

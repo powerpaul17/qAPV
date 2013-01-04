@@ -7,6 +7,7 @@
 
 class QProjectTreeModel:public QAbstractItemModel {
     Q_OBJECT
+
 public:
     QProjectTreeModel(QObject* parent_,CProject* project_);
     ~QProjectTreeModel();

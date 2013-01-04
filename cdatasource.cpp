@@ -1,6 +1,8 @@
 #include "cdatasource.h"
 
-CDataSource::CDataSource(bool isstatic_) {
+CDataSource::CDataSource(DataSourceType datasourcetype_,bool isstatic_) {
+    this->type = DataSource;
+    this->datasourcetype = datasourcetype_;
     this->isstatic = isstatic_;
 }
 

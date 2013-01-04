@@ -3,6 +3,8 @@
 
 #include "wmainwindow.h"
 #include "ui_wmainwindow.h"
+#include "qadddatasourcedialog.h"
+#include "qplotwindow.h"
 
 WMainWindow::WMainWindow(QWidget *parent) :
     QMainWindow(parent),
@@ -10,10 +12,13 @@ WMainWindow::WMainWindow(QWidget *parent) :
 {
     ui->setupUi(this);
 
-    treeView = findChild<QProjectTreeView*>("treeView");
+    //treeView = findChild<QProjectTreeView*>("treeView");
+
+    //mdiArea = findChild<QMdiArea*>("mdiArea");
 
     QObject::connect(this,SIGNAL(signalProjectClosed(bool)),findChild<QMenu*>("menuProject"),SLOT(setDisabled(bool)));
     QObject::connect(this,SIGNAL(signalProjectOpened(bool)),findChild<QMenu*>("menuProject"),SLOT(setEnabled(bool)));
+    (findChild<QMenu*>("menuProject"))->setEnabled(false);
 
     QObject::connect(this,SIGNAL(signalProjectClosed(bool)),findChild<QAction*>("actionClose_project"),SLOT(setDisabled(bool)));
     QObject::connect(this,SIGNAL(signalProjectClosed(bool)),findChild<QAction*>("actionSave_project"),SLOT(setDisabled(bool)));
@@ -38,7 +43,7 @@ void WMainWindow::on_actionNew_project_triggered() {
     on_actionClose_project_triggered();
     project = new CProject();
     treeModel = new QProjectTreeModel(this,project);
-    treeView->setModel(treeModel);
+    ui->treeView->setModel(treeModel);
     emit signalProjectOpened(true);
 }
 
@@ -55,7 +60,7 @@ void WMainWindow::on_actionOpen_project_triggered() {
             return;
         }
         treeModel=new QProjectTreeModel(this,project);
-        treeView->setModel(treeModel);
+        ui->treeView->setModel(treeModel);
     }
 }
 
@@ -90,12 +95,34 @@ void WMainWindow::on_actionClose_project_triggered() {
                 }
             }
         }
-        treeView->setModel(0);
+        ui->treeView->setModel(0);
         delete treeModel;
         treeModel=0;
         delete project;
         project=0;
         emit signalProjectClosed(true);
+    }
+}
+
+void WMainWindow::on_actionNew_data_source_triggered() {
+    if(this->project != 0) {
+        QAddDataSourceDialog dialog(this);
+        if(dialog.exec()==QDialog::Accepted) {
+            project->addChild(dialog.getDataSource());
+            // TODO
+            ui->treeView->repaint();
+        } else {
+
+        }
+    }
+}
+
+void WMainWindow::on_actionNew_plot_triggered() {
+    if(this->project != 0) {
+        CPlot* newPlot = new CPlot();
+        project->addChild(newPlot);
+        QWidget* newPlotWindow = new QPlotWindow(newPlot);
+        ui->mdiArea->addSubWindow(newPlotWindow);
     }
 }
 

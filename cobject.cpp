@@ -1,7 +1,7 @@
 #include "cobject.h"
 
 CObject::CObject() {
-    this->type = GenericType;
+    this->type = Generic;
     this->name = "Object";
 }
 
@@ -14,6 +14,10 @@ CObject::CObject(CObject* parent_, ObjectType type_, long id_, QString name_) {
 
 CObject::~CObject() {
 
+}
+
+void CObject::setId(long id_) {
+    this->id = id_;
 }
 
 long CObject::getId() {

@@ -1,17 +1,17 @@
 #ifndef CPROJECT_H
 #define CPROJECT_H
 
-#include <QVector>
+#include <QtWidgets>
 
 #include "cobject.h"
 
 class CProject:public CObject {
 
     QString filename;
-    QVector<CObject*> children;
+    QList<CObject*> children;
     bool changed;
 
-    unsigned long currId;
+    uint currId;
 
 public:
 
@@ -19,9 +19,9 @@ public:
     ~CProject();
     CProject(QString filename_);
 
-    virtual bool hasChildren();
-    virtual int getNChildren();
-    virtual CObject* getChild(long id_);
+    bool hasChildren();
+    int getNChildren();
+    CObject* getChild(long id_);
 
     void exportToXML(QDomNode* node_);
 
@@ -32,6 +32,8 @@ public:
     void setFilename(QString filename_);
     bool isChanged();
     void setChanged(bool changed_ = true);
+
+    void addChild(CObject* child_);
 };
 
 #endif // CPROJECT_H

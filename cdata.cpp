@@ -17,3 +17,7 @@ double CData::getValue(long id_) {
         return data[id_];
     } else return 0.0;
 }
+
+void CData::appendValue(double value_) {
+    data.append(value_);
+}

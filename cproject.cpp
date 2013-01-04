@@ -1,18 +1,22 @@
 #include "cproject.h"
 
-CProject::CProject():CObject(0,ProjectType,0,"Project") {
+CProject::CProject():CObject(0,Project,0,"Project") {
     //type = ProjectType;
     //name = "Project";
 
     filename = "";
-    currId = 0;
+    currId = 1;
     children.clear();
     changed = false;
 }
 
 CProject::~CProject() {
-    for(QVector<CObject*>::iterator it = children.begin(); it != children.end(); ++it) {
-        delete (*it);
+    //for(QVector<CObject*>::iterator it = children.begin(); it != children.end(); it++) {
+    //    delete it;
+    //}
+    while(children.size()>0) {
+        delete children[0];
+        children.removeFirst();
     }
     children.clear();
 }
@@ -32,16 +36,18 @@ int CProject::getNChildren() {
 }
 
 CObject* CProject::getChild(long id_) {
-    for(QVector<CObject*>::iterator it = children.begin(); it != children.end(); ++it) {
+    for(QList<CObject*>::iterator it = children.begin(); it != children.end(); it++) {
         if((*it)->getId() == id_) return *it;
     }
     return 0;
 }
 
 void CProject::exportToXML(QDomNode* node_) {
-    QDomNode* node = new QDomNode();
+    QDomElement* node = new QDomElement();
+    node->setTagName("Project");
+    node->setAttribute("currId",currId);
     node_->appendChild(*node);
-    for(QVector<CObject*>::iterator it = children.begin(); it != children.end(); ++it) {
+    for(QList<CObject*>::iterator it = children.begin(); it != children.end(); it++) {
         (*it)->exportToXML(node);
     }
 }
@@ -82,4 +88,12 @@ bool CProject::isChanged() {
 
 void CProject::setChanged(bool changed_) {
     changed = changed_;
+}
+
+void CProject::addChild(CObject* child_) {
+    child_->setId(currId);
+    child_->setParent(this);
+    currId++;
+    children.append(child_);
+    setChanged();
 }
