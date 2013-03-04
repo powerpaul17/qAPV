@@ -17,9 +17,10 @@ QAddDataSourceDialog::QAddDataSourceDialog(QWidget *parent) :
         it.next();
         ui->comboBox->addItem(it.key());
     }
-    QObject::connect(ui->comboBox,SIGNAL(activated(QString)),this,SLOT(comboBoxIndexChanged(QString)));
+    ui->comboBox->setCurrentIndex(0);
+    comboBoxIndexChanged(ui->comboBox->currentText());
 
-    //settingsWidget = findChild<QWidget*>("settingsWidget");
+    QObject::connect(ui->comboBox,SIGNAL(activated(QString)),this,SLOT(comboBoxIndexChanged(QString)));
 }
 
 QAddDataSourceDialog::~QAddDataSourceDialog()

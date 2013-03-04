@@ -4,6 +4,7 @@
 #include "cfiledatasource.h"
 
 CFileDataSource::CFileDataSource():CDataSource(FileDataSource,true) {
+    this->name = "FileDataSource";
     this->filename = "";
     constructSettingsWidget();
 }
@@ -33,16 +34,21 @@ int CFileDataSource::getNChildren() {
     return 0;
 }
 
-CObject* CFileDataSource::getChild(long id_) {
+CObject* CFileDataSource::getChildById(long id_) {
     return 0;
 }
 
-void CFileDataSource::exportToXML(QDomNode* node_) {
-    QDomElement* node = new QDomElement();
-    node->setTagName("Data Source");
-    //node->setAttribute("currId",currId);
-    node_->appendChild(*node);
+CObject* CFileDataSource::getChildByPosition(long pos_) {
+    return 0;
+}
+
+void CFileDataSource::exportToXML(QXmlStreamWriter *xml_) {
+    xml_->writeStartElement("DataSource");
+    xml_->writeAttribute("type",QVariant(this->type).toString());
+    xml_->writeAttribute("datasourcetype",QVariant(this->datasourcetype).toString());
+    xml_->writeAttribute("filename",QString(this->filename));
     // TODO
+    xml_->writeEndElement();
 }
 
 QWidget* CFileDataSource::getSettingsWidget() {

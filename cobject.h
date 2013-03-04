@@ -33,9 +33,10 @@ public:
 
     virtual bool hasChildren() = 0;
     virtual int getNChildren() = 0;
-    virtual CObject* getChild(long id_) = 0;
+    virtual CObject* getChildById(long id_) = 0;
+    virtual CObject* getChildByPosition(long pos_) = 0;
 
-    virtual void exportToXML(QDomNode* node_) = 0;
+    virtual void exportToXML(QXmlStreamWriter* xml_) = 0;
 };
 
 #endif // COBJECT_H

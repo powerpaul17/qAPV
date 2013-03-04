@@ -15,6 +15,9 @@ QAddPlotDialog::QAddPlotDialog(QWidget *parent) :
         it.next();
         ui->comboBox->addItem(it.key());
     }
+    ui->comboBox->setCurrentIndex(0);
+    comboBoxIndexChanged(ui->comboBox->currentText());
+
     QObject::connect(ui->comboBox,SIGNAL(activated(QString)),this,SLOT(comboBoxIndexChanged(QString)));
 
 }

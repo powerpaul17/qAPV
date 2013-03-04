@@ -11,6 +11,9 @@ typedef enum {
 } DataSourceType;
 
 class CDataSource:public CObject {
+
+protected:
+
     int datasourcetype;
     bool isstatic;
 

@@ -26,16 +26,24 @@ int CPolarPlot::getNChildren() {
     return 0;
 }
 
-CObject* CPolarPlot::getChild(long id_) {
+CObject* CPolarPlot::getChildById(long id_) {
     return 0;
 }
 
-void CPolarPlot::exportToXML(QDomNode *node_) {
+CObject* CPolarPlot::getChildByPosition(long pos_) {
+    return 0;
+}
+
+void CPolarPlot::exportToXML(QXmlStreamWriter *xml_) {
     //TODO
 }
 
 QWidget* CPolarPlot::getSettingsWidget() {
     return settingsWidget;
+}
+
+void CPolarPlot::drawPlot(QGraphicsScene *scene_) {
+    //TODO
 }
 
 CPlot* CPolarPlot::CreatePlot() {

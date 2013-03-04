@@ -1,4 +1,5 @@
 #include "cproject.h"
+#include "cdatasourcefactory.h"
 
 CProject::CProject():CObject(0,Project,0,"Project") {
     //type = ProjectType;
@@ -11,9 +12,6 @@ CProject::CProject():CObject(0,Project,0,"Project") {
 }
 
 CProject::~CProject() {
-    //for(QVector<CObject*>::iterator it = children.begin(); it != children.end(); it++) {
-    //    delete it;
-    //}
     while(children.size()>0) {
         delete children[0];
         children.removeFirst();
@@ -35,43 +33,91 @@ int CProject::getNChildren() {
     return children.size();
 }
 
-CObject* CProject::getChild(long id_) {
+CObject* CProject::getChildById(long id_) {
     for(QList<CObject*>::iterator it = children.begin(); it != children.end(); it++) {
         if((*it)->getId() == id_) return *it;
     }
     return 0;
 }
 
-void CProject::exportToXML(QDomNode* node_) {
-    QDomElement* node = new QDomElement();
-    node->setTagName("Project");
-    node->setAttribute("currId",currId);
-    node_->appendChild(*node);
-    for(QList<CObject*>::iterator it = children.begin(); it != children.end(); it++) {
-        (*it)->exportToXML(node);
+CObject* CProject::getChildByPosition(long pos_) {
+    if(pos_<children.size()) {
+        return children[pos_];
     }
+    return 0;
+}
+
+void CProject::exportToXML(QXmlStreamWriter *xml_) {
+    xml_->writeStartElement("Project");
+    xml_->writeAttribute("currId",QVariant(currId).toString());
+    for(QList<CObject*>::iterator it = children.begin(); it != children.end(); it++) {
+        (*it)->exportToXML(xml_);
+    }
+    xml_->writeEndElement();
 }
 
 int CProject::loadProjectFromFile() {
-    //TODO
+    QXmlStreamReader* xml = new QXmlStreamReader();
+    CDataSourceFactory dataSourceFactory;
+
+    QFile file(filename);
+    if(file.open(QIODevice::ReadOnly)) {
+        xml->setDevice(&file);
+        if(xml->readNextStartElement()) {
+            if((xml->name()=="qAPV") && (xml->attributes().value("version")=="1.0")) {
+                if(xml->readNextStartElement()) {
+                    if(xml->name()=="Project") {
+                        this->currId=xml->attributes().value("currId").toString().toInt();
+                        while(xml->readNextStartElement()) {
+                            if(xml->name()=="DataSource") {
+
+                            } else if (xml->name()=="Plot") {
+
+                            }
+                        }
+                    } else {
+                        return 3;
+                    }
+                } else {
+                    return 2;
+                }
+            } else {
+                return 3;
+            }
+        } else {
+            return 2;
+        }
+        file.close();
+        setChanged(false);
+    } else {
+        return 1;
+    }
+
+    delete xml;
     return 0;
 }
 
 void CProject::saveProjectToFile() {
-    QDomDocument* document = new QDomDocument("qAPV Document");
-    exportToXML(document);
+    QXmlStreamWriter* xml = new QXmlStreamWriter();
+    xml->setAutoFormatting(true);
 
     QFile file(filename);
     if(file.open(QIODevice::WriteOnly)) {
-        QTextStream textstream(&file);
-        document->save(textstream,0);
+        xml->setDevice(&file);
+        xml->writeStartDocument();
+        xml->writeDTD("<!DOCTYPE qAPV>");
+        xml->writeStartElement("qAPV");
+            xml->writeAttribute("version","1.0");
+        exportToXML(xml);
+        xml->writeEndDocument();
+
         file.close();
         setChanged(false);
     } else {
         // TODO
     }
 
-    delete document;
+    delete xml;
 }
 
 QString CProject::getFilename() {

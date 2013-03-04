@@ -9,11 +9,13 @@ CData::~CData() {
 }
 
 CData::CData(CData &cdata_):CObject() {
-    //TODO!!
+    for(QList<double>::iterator it=data.begin();it!=data.end();it++) {
+        cdata_.appendValue((*it));
+    }
 }
 
 double CData::getValue(long id_) {
-    if((id_>=0)&&(id<data.size())) {
+    if((id_>=0) && (id<data.size())) {
         return data[id_];
     } else return 0.0;
 }
@@ -23,7 +25,7 @@ void CData::appendValue(double value_) {
 }
 
 void CData::deleteValue(long id_) {
-    data.remove(id_);
+    data.removeAt(id_);
 }
 
 void CData::insertValue(long id_, double value_) {

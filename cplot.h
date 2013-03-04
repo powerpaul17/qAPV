@@ -1,9 +1,10 @@
 #ifndef CPLOT_H
 #define CPLOT_H
 
+#include <QtWidgets>
+
 #include "cobject.h"
 #include "cdata.h"
-#include "caxis.h"
 
 typedef enum {
     Plot2D,
@@ -19,13 +20,17 @@ protected:
 
     QList<CData*> dataSeries;
 
-    QList<CAxis> axes;
-
 public:
 
     CPlot(PlotType plotType_);
 
     virtual QWidget* getSettingsWidget() = 0;
+    virtual void drawPlot(QGraphicsScene* scene_) = 0;
+
+    int getPlotType();
+
+    void addDataSeries(CData* dataSeries_);
+    void removeDataSeries(int id_);
 
 };
 

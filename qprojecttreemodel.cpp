@@ -18,7 +18,7 @@ QModelIndex QProjectTreeModel::index(int row,int column,const QModelIndex& paren
             obj=static_cast<CObject*>(parent.internalPointer());
         }
         if(obj==0) return QModelIndex();
-        obj=obj->getChild(row);
+        obj=obj->getChildByPosition(row);
         if(obj!=0) {
             return createIndex(row,column,obj);
         } else {

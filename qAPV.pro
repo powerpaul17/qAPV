@@ -57,4 +57,6 @@ FORMS    += wmainwindow.ui \
     qplotwindow.ui \
     cfiledatasource_settings.ui \
     qaddplotdialog.ui \
-    c2dplot_settings.ui
+    c2dplot_settings.ui \
+    c3dplot_settings.ui \
+    cpolarplot_settings.ui

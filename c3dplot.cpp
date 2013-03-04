@@ -26,16 +26,24 @@ int C3DPlot::getNChildren() {
     return 0;
 }
 
-CObject* C3DPlot::getChild(long id_) {
+CObject* C3DPlot::getChildById(long id_) {
     return 0;
 }
 
-void C3DPlot::exportToXML(QDomNode* node_) {
+CObject* C3DPlot::getChildByPosition(long pos_) {
+    return 0;
+}
+
+void C3DPlot::exportToXML(QXmlStreamWriter *xml_) {
     //TODO
 }
 
 QWidget* C3DPlot::getSettingsWidget() {
     return settingsWidget;
+}
+
+void C3DPlot::drawPlot(QGraphicsScene *scene_) {
+    //TODO
 }
 
 CPlot* C3DPlot::CreatePlot() {

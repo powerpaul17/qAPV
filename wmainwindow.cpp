@@ -62,6 +62,7 @@ void WMainWindow::on_actionOpen_project_triggered() {
         }
         treeModel=new QProjectTreeModel(this,project);
         ui->treeView->setModel(treeModel);
+        emit signalProjectOpened(true);
     }
 }
 
@@ -124,7 +125,8 @@ void WMainWindow::on_actionNew_plot_triggered() {
         if(dialog.exec() == QDialog::Accepted) {
             project->addChild(dialog.getPlot());
             // TODO
-            ui->treeView->repaint();
+            //ui->treeView->repaint();
+            treeModel->dataChanged(treeModel->index(0,0),treeModel->index(treeModel->rowCount()-1,0));
         } else {
 
         }

@@ -14,9 +14,10 @@ public:
 
     bool hasChildren();
     int getNChildren();
-    CObject* getChild(long id_);
+    CObject* getChildById(long id_);
+    CObject* getChildByPosition(long pos_);
 
-    void exportToXML(QDomNode *node_);
+    void exportToXML(QXmlStreamWriter* xml_);
 
     bool isLogarithmic();
     void setLogarithmic(bool logarithmic_);

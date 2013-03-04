@@ -4,7 +4,9 @@
 #include "cobject.h"
 
 class CData:public CObject {
-    QVector<double> data;
+
+    QList<double> data;
+
 public:
     CData();
     ~CData();
@@ -15,6 +17,7 @@ public:
     void deleteValue(long id_);
     void insertValue(long id_,double value_);
     void clearData();
+
 };
 
 #endif // CDATA_H

@@ -6,5 +6,18 @@ CPlot::CPlot(PlotType plotType_) {
     this->plotType = plotType_;
 
     dataSeries.clear();
-    axes.clear();
+}
+
+int CPlot::getPlotType() {
+    return plotType;
+}
+
+void CPlot::addDataSeries(CData *dataSeries_) {
+    dataSeries.append(dataSeries_);
+}
+
+void CPlot::removeDataSeries(int id_) {
+    if((id_>=0) && (id_<dataSeries.size())) {
+        dataSeries.removeAt(id_);
+    }
 }
