@@ -2,23 +2,26 @@
 #define CDATASOURCE_H
 
 #include <QtGui>
+#include <QtWidgets>
 
 #include "cobject.h"
 #include "cdata.h"
 
-typedef enum {
+/* typedef enum {
     FileDataSource
-} DataSourceType;
+} DataSourceType; */
 
 class CDataSource:public CObject {
 
 protected:
 
-    int datasourcetype;
+    //int datasourcetype;
+    QString datasourcetype;
     bool isstatic;
 
 public:
-    CDataSource(DataSourceType datasourcetype_,bool isstatic_);
+    //CDataSource(DataSourceType datasourcetype_,bool isstatic_);
+    CDataSource(QString datasourcetype_,bool isstatic_);
 
     bool getIsStatic();
     void setIsStatic(bool isstatic_);

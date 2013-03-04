@@ -2,7 +2,8 @@
 
 #include "cpolarplot.h"
 
-CPolarPlot::CPolarPlot():CPlot(PlotPolar) {
+CPolarPlot::CPolarPlot():CPlot("Polar") {
+    this->name = "Polarplot";
     constructSettingsWidget();
 }
 
@@ -35,6 +36,10 @@ CObject* CPolarPlot::getChildByPosition(long pos_) {
 }
 
 void CPolarPlot::exportToXML(QXmlStreamWriter *xml_) {
+    //TODO
+}
+
+void CPolarPlot::constructFromXML(QXmlStreamReader *xml_) {
     //TODO
 }
 

@@ -23,6 +23,7 @@ public:
     CObject* getChildByPosition(long pos_);
 
     void exportToXML(QXmlStreamWriter* xml_);
+    void constructFromXML(QXmlStreamReader *xml_);
 
     QWidget* getSettingsWidget();
 

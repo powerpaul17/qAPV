@@ -1,6 +1,6 @@
 #include "cplot.h"
 
-CPlot::CPlot(PlotType plotType_) {
+CPlot::CPlot(QString plotType_) {
     this->type = Plot;
     this->name = "Plot";
     this->plotType = plotType_;
@@ -8,7 +8,7 @@ CPlot::CPlot(PlotType plotType_) {
     dataSeries.clear();
 }
 
-int CPlot::getPlotType() {
+QString CPlot::getPlotType() {
     return plotType;
 }
 

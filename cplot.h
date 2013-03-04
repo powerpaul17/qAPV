@@ -6,15 +6,16 @@
 #include "cobject.h"
 #include "cdata.h"
 
-typedef enum {
+/* typedef enum {
     Plot2D,
     Plot3D,
     PlotPolar
-} PlotType;
+} PlotType; */
 
 class CPlot:public CObject {
 
-    int plotType;
+    // int plotType;
+    QString plotType;
 
 protected:
 
@@ -22,12 +23,14 @@ protected:
 
 public:
 
-    CPlot(PlotType plotType_);
+    //CPlot(PlotType plotType_);
+    CPlot(QString plotType_);
 
     virtual QWidget* getSettingsWidget() = 0;
     virtual void drawPlot(QGraphicsScene* scene_) = 0;
 
-    int getPlotType();
+    //int getPlotType();
+    QString getPlotType();
 
     void addDataSeries(CData* dataSeries_);
     void removeDataSeries(int id_);

@@ -1,5 +1,6 @@
 #include "cproject.h"
 #include "cdatasourcefactory.h"
+#include "cplotfactory.h"
 
 CProject::CProject():CObject(0,Project,0,"Project") {
     //type = ProjectType;
@@ -56,9 +57,27 @@ void CProject::exportToXML(QXmlStreamWriter *xml_) {
     xml_->writeEndElement();
 }
 
+void CProject::constructFromXML(QXmlStreamReader *xml_) {
+    CDataSourceFactory dataSourceFactory;
+    CPlotFactory plotFactory;
+
+    this->currId = xml_->attributes().value("currId").toString().toInt();
+    while(xml_->readNextStartElement()) {
+        if(xml_->name()=="DataSource") {
+            CDataSource* newDataSource = dataSourceFactory.createDataSource(xml_->attributes().value("dataSourceType").toString());
+            newDataSource->constructFromXML(xml_);
+            this->addChild(newDataSource);
+        } else if (xml_->name()=="Plot") {
+            CPlot* newPlot = plotFactory.createPlot(xml_->attributes().value("plotType").toString());
+            newPlot->constructFromXML(xml_);
+            this->addChild(newPlot);
+        }
+    }
+    xml_->skipCurrentElement();
+}
+
 int CProject::loadProjectFromFile() {
     QXmlStreamReader* xml = new QXmlStreamReader();
-    CDataSourceFactory dataSourceFactory;
 
     QFile file(filename);
     if(file.open(QIODevice::ReadOnly)) {
@@ -67,14 +86,7 @@ int CProject::loadProjectFromFile() {
             if((xml->name()=="qAPV") && (xml->attributes().value("version")=="1.0")) {
                 if(xml->readNextStartElement()) {
                     if(xml->name()=="Project") {
-                        this->currId=xml->attributes().value("currId").toString().toInt();
-                        while(xml->readNextStartElement()) {
-                            if(xml->name()=="DataSource") {
-
-                            } else if (xml->name()=="Plot") {
-
-                            }
-                        }
+                        this->constructFromXML(xml);
                     } else {
                         return 3;
                     }

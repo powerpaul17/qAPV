@@ -37,6 +37,7 @@ public:
     virtual CObject* getChildByPosition(long pos_) = 0;
 
     virtual void exportToXML(QXmlStreamWriter* xml_) = 0;
+    virtual void constructFromXML(QXmlStreamReader* xml_) = 0;
 };
 
 #endif // COBJECT_H

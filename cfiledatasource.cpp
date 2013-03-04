@@ -3,13 +3,13 @@
 
 #include "cfiledatasource.h"
 
-CFileDataSource::CFileDataSource():CDataSource(FileDataSource,true) {
+CFileDataSource::CFileDataSource():CDataSource("File",true) {
     this->name = "FileDataSource";
     this->filename = "";
     constructSettingsWidget();
 }
 
-CFileDataSource::CFileDataSource(QString filename_):CDataSource(FileDataSource,true) {
+CFileDataSource::CFileDataSource(QString filename_):CDataSource("File",true) {
     this->filename = filename_;
     constructSettingsWidget();
 }
@@ -45,10 +45,15 @@ CObject* CFileDataSource::getChildByPosition(long pos_) {
 void CFileDataSource::exportToXML(QXmlStreamWriter *xml_) {
     xml_->writeStartElement("DataSource");
     xml_->writeAttribute("type",QVariant(this->type).toString());
-    xml_->writeAttribute("datasourcetype",QVariant(this->datasourcetype).toString());
+    xml_->writeAttribute("dataSourceType",QVariant(this->datasourcetype).toString());
     xml_->writeAttribute("filename",QString(this->filename));
     // TODO
     xml_->writeEndElement();
+}
+
+void CFileDataSource::constructFromXML(QXmlStreamReader *xml_) {
+    this->filename = xml_->attributes().value("filename").toString();
+    xml_->skipCurrentElement();
 }
 
 QWidget* CFileDataSource::getSettingsWidget() {

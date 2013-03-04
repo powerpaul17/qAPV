@@ -2,7 +2,8 @@
 
 #include "c3dplot.h"
 
-C3DPlot::C3DPlot():CPlot(Plot3D) {
+C3DPlot::C3DPlot():CPlot("3D") {
+    this->name = "3D Plot";
     constructSettingsWidget();
 }
 
@@ -35,6 +36,10 @@ CObject* C3DPlot::getChildByPosition(long pos_) {
 }
 
 void C3DPlot::exportToXML(QXmlStreamWriter *xml_) {
+    //TODO
+}
+
+void C3DPlot::constructFromXML(QXmlStreamReader *xml_) {
     //TODO
 }
 
