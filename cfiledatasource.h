@@ -16,12 +16,13 @@ class CFileDataSource:public CDataSource {
 public:
     CFileDataSource();
     CFileDataSource(QString filename_);
-    ~CFileDataSource();
+    virtual ~CFileDataSource();
 
     bool hasChildren();
     int getNChildren();
     CObject* getChildById(long id_);
     CObject* getChildByPosition(long pos_);
+    int getPositionOfChild(CObject* child_);
 
     void exportToXML(QXmlStreamWriter* xml_);
     void constructFromXML(QXmlStreamReader *xml_);

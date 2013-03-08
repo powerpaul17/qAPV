@@ -112,7 +112,9 @@ void WMainWindow::on_actionNew_data_source_triggered() {
         if(dialog.exec() == QDialog::Accepted) {
             project->addChild(dialog.getDataSource());
             // TODO
-            ui->treeView->repaint();
+            //ui->treeView->repaint();
+            //ui->treeView->setModel(treeModel);
+            ui->treeView->expandAll();
         } else {
 
         }
@@ -126,7 +128,8 @@ void WMainWindow::on_actionNew_plot_triggered() {
             project->addChild(dialog.getPlot());
             // TODO
             //ui->treeView->repaint();
-            treeModel->dataChanged(treeModel->index(0,0),treeModel->index(treeModel->rowCount()-1,0));
+            //ui->treeView->setModel(treeModel);
+            ui->treeView->expandAll();
         } else {
 
         }

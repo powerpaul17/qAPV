@@ -1,6 +1,7 @@
 #include "cobject.h"
 
 CObject::CObject() {
+    this->parent = 0;
     this->type = Generic;
     this->name = "Object";
 }
@@ -38,4 +39,8 @@ void CObject::setParent(CObject* parent_) {
 
 CObject* CObject::getParent() {
     return parent;
+}
+
+bool CObject::hasParent() {
+    return parent!=0;
 }

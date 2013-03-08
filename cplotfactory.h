@@ -12,7 +12,7 @@ class CPlotFactory {
 public:
 
     CPlotFactory();
-    ~CPlotFactory();
+    virtual ~CPlotFactory();
 
     void registerPlot(const QString& name_, CreatePlotFunc createfunc_);
 

@@ -12,7 +12,7 @@ public:
 
 public Q_SLOTS:
 
-        void itemPressed(const QModelIndex& index_);
+        // void itemPressed(const QModelIndex& index_);
 };
 
 #endif // QPROJECTTREEVIEW_H

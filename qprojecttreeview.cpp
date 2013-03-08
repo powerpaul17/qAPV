@@ -12,6 +12,10 @@ void QProjectTreeView::contextMenuEvent(QContextMenuEvent* event_) {
 
 }
 
-void QProjectTreeView::itemPressed(const QModelIndex& index_) {
+// void QProjectTreeView::activated(const QModelIndex &index) {
+//
+// }
 
-}
+// void QProjectTreeView::itemPressed(const QModelIndex& index_) {
+//
+// }

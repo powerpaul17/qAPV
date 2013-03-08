@@ -35,6 +35,7 @@ public:
     virtual int getNChildren() = 0;
     virtual CObject* getChildById(long id_) = 0;
     virtual CObject* getChildByPosition(long pos_) = 0;
+    virtual int getPositionOfChild(CObject* child_) = 0;
 
     virtual void exportToXML(QXmlStreamWriter* xml_) = 0;
     virtual void constructFromXML(QXmlStreamReader* xml_) = 0;

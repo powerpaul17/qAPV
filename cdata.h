@@ -9,7 +9,7 @@ class CData:public CObject {
 
 public:
     CData();
-    ~CData();
+    virtual ~CData();
     CData(CData& cdata_);
 
     double getValue(long id_);

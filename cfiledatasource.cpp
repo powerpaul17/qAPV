@@ -42,6 +42,10 @@ CObject* CFileDataSource::getChildByPosition(long pos_) {
     return 0;
 }
 
+int CFileDataSource::getPositionOfChild(CObject* child_) {
+    return -1;
+}
+
 void CFileDataSource::exportToXML(QXmlStreamWriter *xml_) {
     xml_->writeStartElement("DataSource");
     xml_->writeAttribute("type",QVariant(this->type).toString());

@@ -24,6 +24,10 @@ CObject* CAxis::getChildByPosition(long pos_) {
     return 0;
 }
 
+int CAxis::getPositionOfChild(CObject* child_) {
+    return -1;
+}
+
 void CAxis::exportToXML(QXmlStreamWriter *xml_) {
     xml_->writeStartElement("Axis");
         xml_->writeAttribute("name",this->getName());

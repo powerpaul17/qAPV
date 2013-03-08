@@ -9,7 +9,7 @@ class CDataSourceFactory {
     QMap<QString,CreateDataSourceFunc> dataSourceMap;
 public:
     CDataSourceFactory();
-    ~CDataSourceFactory();
+    virtual ~CDataSourceFactory();
 
     void registerDataSource(const QString& name_, CreateDataSourceFunc createfunc_);
 

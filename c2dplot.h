@@ -15,12 +15,13 @@ class C2DPlot:public CPlot {
 public:
 
     C2DPlot();
-    ~C2DPlot();
+    virtual ~C2DPlot();
 
     bool hasChildren();
     int getNChildren();
     CObject* getChildById(long id_);
     CObject* getChildByPosition(long pos_);
+    int getPositionOfChild(CObject* child_);
 
     void exportToXML(QXmlStreamWriter* xml_);
     void constructFromXML(QXmlStreamReader *xml_);

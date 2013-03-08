@@ -37,6 +37,11 @@ CObject* C2DPlot::getChildById(long id_) {
 CObject* C2DPlot::getChildByPosition(long pos_) {
     return 0;
 }
+
+int C2DPlot::getPositionOfChild(CObject* child_) {
+    return -1;
+}
+
 void C2DPlot::exportToXML(QXmlStreamWriter* xml_) {
     xml_->writeStartElement("Plot");
     xml_->writeAttribute("type",QVariant(this->type).toString());

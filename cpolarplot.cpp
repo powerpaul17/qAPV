@@ -35,6 +35,10 @@ CObject* CPolarPlot::getChildByPosition(long pos_) {
     return 0;
 }
 
+int CPolarPlot::getPositionOfChild(CObject* child_) {
+    return -1;
+}
+
 void CPolarPlot::exportToXML(QXmlStreamWriter *xml_) {
     //TODO
 }

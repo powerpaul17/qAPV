@@ -35,6 +35,10 @@ CObject* C3DPlot::getChildByPosition(long pos_) {
     return 0;
 }
 
+int C3DPlot::getPositionOfChild(CObject* child_) {
+    return -1;
+}
+
 void C3DPlot::exportToXML(QXmlStreamWriter *xml_) {
     //TODO
 }

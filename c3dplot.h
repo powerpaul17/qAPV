@@ -15,12 +15,13 @@ class C3DPlot:public CPlot {
 public:
 
     C3DPlot();
-    ~C3DPlot();
+    virtual ~C3DPlot();
 
     bool hasChildren();
     int getNChildren();
     CObject* getChildById(long id_);
     CObject* getChildByPosition(long pos_);
+    int getPositionOfChild(CObject* child_);
 
     void exportToXML(QXmlStreamWriter* xml_);
     void constructFromXML(QXmlStreamReader *xml_);

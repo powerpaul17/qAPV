@@ -48,7 +48,14 @@ CObject* CProject::getChildByPosition(long pos_) {
     return 0;
 }
 
-void CProject::exportToXML(QXmlStreamWriter *xml_) {
+int CProject::getPositionOfChild(CObject* child_) {
+    for(int i = 0; i < children.size(); i++) {
+        if(children[i] == child_) return i;
+    }
+    return -1;
+}
+
+void CProject::exportToXML(QXmlStreamWriter* xml_) {
     xml_->writeStartElement("Project");
     xml_->writeAttribute("currId",QVariant(currId).toString());
     for(QList<CObject*>::iterator it = children.begin(); it != children.end(); it++) {
@@ -57,7 +64,7 @@ void CProject::exportToXML(QXmlStreamWriter *xml_) {
     xml_->writeEndElement();
 }
 
-void CProject::constructFromXML(QXmlStreamReader *xml_) {
+void CProject::constructFromXML(QXmlStreamReader* xml_) {
     CDataSourceFactory dataSourceFactory;
     CPlotFactory plotFactory;
 
@@ -146,6 +153,7 @@ bool CProject::isChanged() {
 
 void CProject::setChanged(bool changed_) {
     changed = changed_;
+    //emit projectChanged();
 }
 
 void CProject::addChild(CObject* child_) {
@@ -155,3 +163,7 @@ void CProject::addChild(CObject* child_) {
     children.append(child_);
     setChanged();
 }
+
+/*void CProject::projectChanged() {
+    //TODO
+}*/

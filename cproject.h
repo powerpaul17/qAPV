@@ -7,6 +7,8 @@
 
 class CProject:public CObject {
 
+    //Q_OBJECT
+
     QString filename;
     QList<CObject*> children;
     bool changed;
@@ -16,13 +18,14 @@ class CProject:public CObject {
 public:
 
     CProject();
-    ~CProject();
+    virtual ~CProject();
     CProject(QString filename_);
 
     bool hasChildren();
     int getNChildren();
     CObject* getChildById(long id_);
     CObject* getChildByPosition(long pos_);
+    int getPositionOfChild(CObject* child_);
 
     void exportToXML(QXmlStreamWriter* xml_);
     void constructFromXML(QXmlStreamReader* xml_);
@@ -36,6 +39,11 @@ public:
     void setChanged(bool changed_ = true);
 
     void addChild(CObject* child_);
+
+//signals:
+
+    //void projectChanged();
+
 };
 
 #endif // CPROJECT_H

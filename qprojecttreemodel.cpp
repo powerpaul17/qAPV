@@ -2,6 +2,8 @@
 
 QProjectTreeModel::QProjectTreeModel(QObject* parent_,CProject* project_):QAbstractItemModel(parent_) {
     project=project_;
+
+    // QObject::connect(project_,SIGNAL(projectChanged(void)),this,SLOT(projectChanged(void)));
 }
 
 QProjectTreeModel::~QProjectTreeModel() {
@@ -13,7 +15,8 @@ QModelIndex QProjectTreeModel::index(int row,int column,const QModelIndex& paren
     if(project!=0) {
         CObject* obj=0;
         if(!parent.isValid()) {
-            obj=project;
+            //obj=project;
+            return createIndex(0,0,project);
         } else {
             obj=static_cast<CObject*>(parent.internalPointer());
         }
@@ -37,10 +40,10 @@ QModelIndex QProjectTreeModel::parent(const QModelIndex& index) const {
         if(obj==0) return QModelIndex();
         obj=obj->getParent();
         if(obj!=0) {
-            if(obj->getId()>=0) {
-                return createIndex(obj->getId(),0,obj);
+            if(obj->hasParent()) {
+                return createIndex((obj->getParent())->getPositionOfChild(obj),0,obj);
             } else {
-                return QModelIndex();
+                return createIndex(0,0,obj);
             }
         } else {
             return QModelIndex();
@@ -51,7 +54,8 @@ QModelIndex QProjectTreeModel::parent(const QModelIndex& index) const {
 int QProjectTreeModel::rowCount(const QModelIndex& parent) const {
     if(project!=0) {
         if(!parent.isValid()) {
-            return project->getNChildren();
+            //return project->getNChildren();
+            return 1;
         } else {
             CObject* obj=static_cast<CObject*>(parent.internalPointer());
             return obj->getNChildren();
@@ -80,7 +84,7 @@ QVariant QProjectTreeModel::data(const QModelIndex& index,int role) const {
 
 Qt::ItemFlags QProjectTreeModel::flags(const QModelIndex& index) const {
     if(!index.isValid()) return 0;
-        return Qt::ItemIsEnabled | Qt::ItemIsSelectable;
+        return Qt::ItemIsEnabled | Qt::ItemIsSelectable | Qt::ItemIsEditable;
 }
 
 QVariant QProjectTreeModel::headerData(int section,Qt::Orientation orientation,int role) const {
@@ -89,4 +93,9 @@ QVariant QProjectTreeModel::headerData(int section,Qt::Orientation orientation,i
     } else {
         return QVariant();
     }
+}
+
+void QProjectTreeModel::projectChanged() {
+    //TODO
+    emit QProjectTreeModel::dataChanged(index(0,0),index(rowCount()-1,0));
 }
