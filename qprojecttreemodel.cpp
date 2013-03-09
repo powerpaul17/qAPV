@@ -99,3 +99,12 @@ void QProjectTreeModel::projectChanged() {
     //TODO
     emit QProjectTreeModel::dataChanged(index(0,0),index(rowCount()-1,0));
 }
+
+bool QProjectTreeModel::setData(const QModelIndex &index, const QVariant &value, int role) {
+    if(role == Qt::EditRole) {
+        CObject* obj = static_cast<CObject*>(index.internalPointer());
+        obj->setName(value.toString());
+        emit dataChanged(index,index);
+    }
+    return true;
+}

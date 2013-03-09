@@ -4,6 +4,12 @@
 #include <QString>
 #include <QtXml/QtXml>
 
+class CObject : public QObject {
+
+    Q_OBJECT
+
+public:
+
 typedef enum {
     Generic,
     Project,
@@ -12,12 +18,12 @@ typedef enum {
     Axis
 } ObjectType;
 
-class CObject {
 protected:
     ObjectType type;
     long id;
     QString name;
     CObject* parent;
+
 public:
     CObject();
     CObject(CObject* parent_,ObjectType type_ = Generic,long id_ = -1,QString name_ = "Object");
@@ -27,6 +33,8 @@ public:
     long getId();
     void setName(QString name_);
     QString getName();
+    ObjectType getType();
+    void setType(ObjectType type_);
     bool hasParent();
     void setParent(CObject* parent_);
     CObject* getParent();
@@ -39,6 +47,11 @@ public:
 
     virtual void exportToXML(QXmlStreamWriter* xml_) = 0;
     virtual void constructFromXML(QXmlStreamReader* xml_) = 0;
+
+signals:
+
+    void signal_nameChanged();
+
 };
 
 #endif // COBJECT_H

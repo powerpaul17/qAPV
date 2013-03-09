@@ -44,6 +44,7 @@ int C2DPlot::getPositionOfChild(CObject* child_) {
 
 void C2DPlot::exportToXML(QXmlStreamWriter* xml_) {
     xml_->writeStartElement("Plot");
+    xml_->writeAttribute("name",this->getName());
     xml_->writeAttribute("type",QVariant(this->type).toString());
     xml_->writeAttribute("plotType",QVariant(this->getPlotType()).toString());
 
@@ -56,6 +57,7 @@ void C2DPlot::exportToXML(QXmlStreamWriter* xml_) {
 
 void C2DPlot::constructFromXML(QXmlStreamReader *xml_) {
     //TODO
+    this->setName(xml_->attributes().value("name").toString());
     while(xml_->readNextStartElement()) {
         if(xml_->name()=="Axis") {
             if(xml_->attributes().value("name").toString() == "x") {

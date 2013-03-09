@@ -57,6 +57,7 @@ int CProject::getPositionOfChild(CObject* child_) {
 
 void CProject::exportToXML(QXmlStreamWriter* xml_) {
     xml_->writeStartElement("Project");
+    xml_->writeAttribute("name",this->getName());
     xml_->writeAttribute("currId",QVariant(currId).toString());
     for(QList<CObject*>::iterator it = children.begin(); it != children.end(); it++) {
         (*it)->exportToXML(xml_);
@@ -68,6 +69,7 @@ void CProject::constructFromXML(QXmlStreamReader* xml_) {
     CDataSourceFactory dataSourceFactory;
     CPlotFactory plotFactory;
 
+    this->setName(xml_->attributes().value("name").toString());
     this->currId = xml_->attributes().value("currId").toString().toInt();
     while(xml_->readNextStartElement()) {
         if(xml_->name()=="DataSource") {

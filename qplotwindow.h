@@ -10,8 +10,8 @@ namespace Ui {
 class QPlotWindow;
 }
 
-class QPlotWindow : public QWidget
-{
+class QPlotWindow : public QWidget {
+
     Q_OBJECT
 
     CPlot* plot;
@@ -24,6 +24,11 @@ public:
     
 private:
     Ui::QPlotWindow *ui;
+
+public slots:
+
+    void on_plot_nameChanged();
+
 };
 
 #endif // QPLOTWINDOW_H

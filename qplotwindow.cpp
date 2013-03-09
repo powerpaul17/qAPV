@@ -10,9 +10,16 @@ QPlotWindow::QPlotWindow(CPlot* plot_,QWidget *parent) :
     //graphicsView = findChild<QGraphicsView*>("graphicsView");
 
     this->plot = plot_;
+
+    this->setWindowTitle(plot->getName());
+
+    QObject::connect(plot,SIGNAL(signal_nameChanged()),this,SLOT(on_plot_nameChanged()));
 }
 
-QPlotWindow::~QPlotWindow()
-{
+QPlotWindow::~QPlotWindow() {
     delete ui;
+}
+
+void QPlotWindow::on_plot_nameChanged() {
+    this->setWindowTitle(plot->getName());
 }

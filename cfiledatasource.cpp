@@ -48,6 +48,7 @@ int CFileDataSource::getPositionOfChild(CObject* child_) {
 
 void CFileDataSource::exportToXML(QXmlStreamWriter *xml_) {
     xml_->writeStartElement("DataSource");
+    xml_->writeAttribute("name",this->getName());
     xml_->writeAttribute("type",QVariant(this->type).toString());
     xml_->writeAttribute("dataSourceType",QVariant(this->datasourcetype).toString());
     xml_->writeAttribute("filename",QString(this->filename));
@@ -56,6 +57,7 @@ void CFileDataSource::exportToXML(QXmlStreamWriter *xml_) {
 }
 
 void CFileDataSource::constructFromXML(QXmlStreamReader *xml_) {
+    this->setName(xml_->attributes().value("name").toString());
     this->filename = xml_->attributes().value("filename").toString();
     xml_->skipCurrentElement();
 }

@@ -13,10 +13,6 @@ WMainWindow::WMainWindow(QWidget *parent) :
 {
     ui->setupUi(this);
 
-    //treeView = findChild<QProjectTreeView*>("treeView");
-
-    //mdiArea = findChild<QMdiArea*>("mdiArea");
-
     QObject::connect(this,SIGNAL(signalProjectClosed(bool)),findChild<QMenu*>("menuProject"),SLOT(setDisabled(bool)));
     QObject::connect(this,SIGNAL(signalProjectOpened(bool)),findChild<QMenu*>("menuProject"),SLOT(setEnabled(bool)));
     (findChild<QMenu*>("menuProject"))->setEnabled(false);
@@ -27,6 +23,8 @@ WMainWindow::WMainWindow(QWidget *parent) :
     QObject::connect(this,SIGNAL(signalProjectOpened(bool)),findChild<QAction*>("actionClose_project"),SLOT(setEnabled(bool)));
     QObject::connect(this,SIGNAL(signalProjectOpened(bool)),findChild<QAction*>("actionSave_project"),SLOT(setEnabled(bool)));
     QObject::connect(this,SIGNAL(signalProjectOpened(bool)),findChild<QAction*>("actionSave_project_as"),SLOT(setEnabled(bool)));
+
+    QObject::connect(ui->treeView,SIGNAL(activated(QModelIndex)),this,SLOT(on_treeView_itemActivated(QModelIndex)));
 
     this->project = 0;
 
@@ -138,4 +136,11 @@ void WMainWindow::on_actionNew_plot_triggered() {
 
 void WMainWindow::closeEvent(QCloseEvent *event) {
     on_actionClose_project_triggered();
+}
+
+void WMainWindow::on_treeView_itemActivated(QModelIndex index_) {
+    CObject* obj_ = static_cast<CObject*>(index_.internalPointer());
+    if(obj_->getType() == CObject::Plot) {
+        ui->mdiArea->addSubWindow(new QPlotWindow(static_cast<CPlot*>(obj_),ui->mdiArea));
+    }
 }

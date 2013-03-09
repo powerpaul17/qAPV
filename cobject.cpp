@@ -1,12 +1,12 @@
 #include "cobject.h"
 
-CObject::CObject() {
+CObject::CObject() : QObject() {
     this->parent = 0;
     this->type = Generic;
     this->name = "Object";
 }
 
-CObject::CObject(CObject* parent_, ObjectType type_, long id_, QString name_) {
+CObject::CObject(CObject* parent_, ObjectType type_, long id_, QString name_) : QObject(parent_) {
     this->parent = parent_;
     this->type = type_;
     this->id = id_;
@@ -33,6 +33,14 @@ QString CObject::getName() {
     return name;
 }
 
+CObject::ObjectType CObject::getType() {
+    return this->type;
+}
+
+void CObject::setType(ObjectType type_) {
+    this->type = type_;
+}
+
 void CObject::setParent(CObject* parent_) {
     parent = parent_;
 }
@@ -43,4 +51,8 @@ CObject* CObject::getParent() {
 
 bool CObject::hasParent() {
     return parent!=0;
+}
+
+void CObject::signal_nameChanged() {
+
 }
