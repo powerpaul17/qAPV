@@ -24,7 +24,7 @@ WMainWindow::WMainWindow(QWidget *parent) :
     QObject::connect(this,SIGNAL(signalProjectOpened(bool)),findChild<QAction*>("actionSave_project"),SLOT(setEnabled(bool)));
     QObject::connect(this,SIGNAL(signalProjectOpened(bool)),findChild<QAction*>("actionSave_project_as"),SLOT(setEnabled(bool)));
 
-    QObject::connect(ui->treeView,SIGNAL(activated(QModelIndex)),this,SLOT(on_treeView_itemActivated(QModelIndex)));
+    QObject::connect(ui->treeView,SIGNAL(activated(QModelIndex)),this,SLOT(slot_treeView_itemActivated(QModelIndex)));
 
     this->project = 0;
 
@@ -138,9 +138,15 @@ void WMainWindow::closeEvent(QCloseEvent *event) {
     on_actionClose_project_triggered();
 }
 
-void WMainWindow::on_treeView_itemActivated(QModelIndex index_) {
+void WMainWindow::slot_treeView_itemActivated(QModelIndex index_) {
     CObject* obj_ = static_cast<CObject*>(index_.internalPointer());
     if(obj_->getType() == CObject::Plot) {
+        for(QList<QMdiSubWindow*>::Iterator it = ui->mdiArea->subWindowList().begin();it!=ui->mdiArea->subWindowList().end();it++) {
+            // if(dynamic_cast<QPlotWindow*>(*it)->getPlotId() == static_cast<CPlot*>(obj_)->getId()) {
+                // ui->mdiArea->setActiveSubWindow((*it));
+                // TODO
+            //}
+        }
         ui->mdiArea->addSubWindow(new QPlotWindow(static_cast<CPlot*>(obj_),ui->mdiArea));
     }
 }

@@ -21,13 +21,15 @@ class QPlotWindow : public QWidget {
 public:
     explicit QPlotWindow(CPlot* plot_,QWidget *parent = 0);
     ~QPlotWindow();
+
+    long getPlotId();
     
 private:
     Ui::QPlotWindow *ui;
 
 public slots:
 
-    void on_plot_nameChanged();
+    void slot_plot_nameChanged();
 
 };
 

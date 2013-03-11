@@ -11,15 +11,25 @@ QPlotWindow::QPlotWindow(CPlot* plot_,QWidget *parent) :
 
     this->plot = plot_;
 
+    ui->settingsWidget->close();
+    ui->settingsWidget = plot->getSettingsWidget();
+    ui->horizontalLayout->addWidget(ui->settingsWidget);
+    ui->horizontalLayout->update();
+
     this->setWindowTitle(plot->getName());
 
-    QObject::connect(plot,SIGNAL(signal_nameChanged()),this,SLOT(on_plot_nameChanged()));
+    QObject::connect(plot,SIGNAL(signal_nameChanged()),this,SLOT(slot_plot_nameChanged()));
 }
 
 QPlotWindow::~QPlotWindow() {
+    ui->settingsWidget->setParent(0);
     delete ui;
 }
 
-void QPlotWindow::on_plot_nameChanged() {
+long QPlotWindow::getPlotId() {
+    return plot->getId();
+}
+
+void QPlotWindow::slot_plot_nameChanged() {
     this->setWindowTitle(plot->getName());
 }

@@ -27,6 +27,7 @@ long CObject::getId() {
 
 void CObject::setName(QString name_) {
     name = name_;
+    emit signal_nameChanged();
 }
 
 QString CObject::getName() {
@@ -51,8 +52,4 @@ CObject* CObject::getParent() {
 
 bool CObject::hasParent() {
     return parent!=0;
-}
-
-void CObject::signal_nameChanged() {
-
 }

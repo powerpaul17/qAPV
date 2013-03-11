@@ -24,6 +24,7 @@ QAddPlotDialog::QAddPlotDialog(QWidget *parent) :
 
 QAddPlotDialog::~QAddPlotDialog()
 {
+    ui->settingsWidget->setParent(0);
     delete ui;
 }
 

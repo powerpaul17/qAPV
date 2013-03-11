@@ -40,7 +40,7 @@ public slots:
     void on_actionNew_data_source_triggered();
     void on_actionNew_plot_triggered();
 
-    void on_treeView_itemActivated(QModelIndex index_);
+    void slot_treeView_itemActivated(QModelIndex index_);
     
 private:
     Ui::WMainWindow *ui;
