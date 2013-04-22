@@ -21,15 +21,6 @@ public:
     virtual ~CProject();
     CProject(QString filename_);
 
-    bool hasChildren();
-    int getNChildren();
-    CObject* getChildById(long id_);
-    CObject* getChildByPosition(long pos_);
-    int getPositionOfChild(CObject* child_);
-    void addChild(CObject *child_);
-    void removeChild(CObject* child_);
-    void removeChild(long id_);
-
     void exportToXML(QXmlStreamWriter* xml_);
     void constructFromXML(QXmlStreamReader* xml_);
 
@@ -44,10 +35,6 @@ public:
 //signals:
 
     //void projectChanged();
-
-public slots:
-
-    virtual void slot_childDestroyed(CObject *child_);
 
 };
 

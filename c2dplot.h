@@ -6,7 +6,7 @@
 
 class C2DPlot:public CPlot {
 
-    CAxis x,y;
+    CAxis* x,y;
 
     QGraphicsScene* scene;
 
@@ -17,15 +17,6 @@ public:
     C2DPlot();
     virtual ~C2DPlot();
 
-    bool hasChildren();
-    int getNChildren();
-    CObject* getChildById(long id_);
-    CObject* getChildByPosition(long pos_);
-    int getPositionOfChild(CObject* child_);
-    void addChild(CObject *child_);
-    void removeChild(CObject *child_);
-    void removeChild(long id_);
-
     void exportToXML(QXmlStreamWriter* xml_);
     void constructFromXML(QXmlStreamReader *xml_);
 
@@ -34,10 +25,6 @@ public:
     QGraphicsScene* getGraphicsScene();
 
     static CPlot* CreatePlot();
-
-public slots:
-
-    virtual void slot_childDestroyed(CObject *child_);
 
 };
 

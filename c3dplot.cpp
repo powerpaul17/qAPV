@@ -20,38 +20,6 @@ QWidget* C3DPlot::constructSettingsWidget(QWidget* parent_) {
     return settingsWidget;
 }
 
-bool C3DPlot::hasChildren() {
-    return false;
-}
-
-int C3DPlot::getNChildren() {
-    return 0;
-}
-
-CObject* C3DPlot::getChildById(long id_) {
-    return 0;
-}
-
-CObject* C3DPlot::getChildByPosition(long pos_) {
-    return 0;
-}
-
-int C3DPlot::getPositionOfChild(CObject* child_) {
-    return -1;
-}
-
-void C3DPlot::addChild(CObject *child_) {
-
-}
-
-void C3DPlot::removeChild(CObject *child_) {
-
-}
-
-void C3DPlot::removeChild(long id_) {
-
-}
-
 void C3DPlot::exportToXML(QXmlStreamWriter *xml_) {
     //TODO
 }
@@ -70,8 +38,4 @@ QGraphicsScene* C3DPlot::getGraphicsScene() {
 
 CPlot* C3DPlot::CreatePlot() {
     return new C3DPlot();
-}
-
-void C3DPlot::slot_childDestroyed(CObject *child_) {
-
 }

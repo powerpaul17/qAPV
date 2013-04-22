@@ -2,10 +2,7 @@
 #include "cdatasourcefactory.h"
 #include "cplotfactory.h"
 
-CProject::CProject():CObject(0,Project,0,"Project") {
-    //type = ProjectType;
-    //name = "Project";
-
+CProject::CProject():CObject(0,"Project",0,"Project") {
     filename = "";
     currId = 1;
     children.clear();
@@ -24,35 +21,6 @@ CProject::CProject(QString filename_) {
     CProject();
     filename = filename_;
     loadProjectFromFile();
-}
-
-bool CProject::hasChildren() {
-    return (children.size()>0);
-}
-
-int CProject::getNChildren() {
-    return children.size();
-}
-
-CObject* CProject::getChildById(long id_) {
-    for(QList<CObject*>::iterator it = children.begin(); it != children.end(); it++) {
-        if((*it)->getId() == id_) return *it;
-    }
-    return 0;
-}
-
-CObject* CProject::getChildByPosition(long pos_) {
-    if(pos_<children.size()) {
-        return children[pos_];
-    }
-    return 0;
-}
-
-int CProject::getPositionOfChild(CObject* child_) {
-    for(int i = 0; i < children.size(); i++) {
-        if(children[i] == child_) return i;
-    }
-    return -1;
 }
 
 void CProject::exportToXML(QXmlStreamWriter* xml_) {
@@ -158,27 +126,6 @@ void CProject::setChanged(bool changed_) {
     //emit projectChanged();
 }
 
-void CProject::addChild(CObject* child_) {
-    child_->setId(currId);
-    child_->setParent(this);
-    currId++;
-    children.append(child_);
-    setChanged();
-    //TODO
-}
-
-void CProject::removeChild(CObject *child_) {
-    //TODO
-}
-
-void CProject::removeChild(long id_) {
-    //TODO
-}
-
 /*void CProject::projectChanged() {
     //TODO
 }*/
-
-void CProject::slot_childDestroyed(CObject *child_) {
-    //TODO
-}

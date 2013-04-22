@@ -6,6 +6,7 @@
 #include "qadddatasourcedialog.h"
 #include "qaddplotdialog.h"
 #include "qplotwindow.h"
+#include "cgraph.h"
 
 WMainWindow::WMainWindow(QWidget *parent) :
     QMainWindow(parent),
@@ -95,12 +96,22 @@ void WMainWindow::on_actionClose_project_triggered() {
                 }
             }
         }
+        ui->mdiArea->closeAllSubWindows();
         ui->treeView->setModel(0);
         delete treeModel;
         treeModel=0;
         delete project;
         project=0;
         emit signalProjectClosed(true);
+    }
+}
+
+void WMainWindow::on_actionNew_graph_triggered() {
+    if(this->project != 0) {
+        project->addChild(new CGraph());
+        ui->treeView->expandAll();
+    } else {
+
     }
 }
 
@@ -140,7 +151,7 @@ void WMainWindow::closeEvent(QCloseEvent *event) {
 
 void WMainWindow::slot_treeView_itemActivated(QModelIndex index_) {
     CObject* obj_ = static_cast<CObject*>(index_.internalPointer());
-    if(obj_->getType() == CObject::Plot) {
+    if(obj_->getType() == "Plot") {
         //for(QList<QMdiSubWindow*>::Iterator it = ui->mdiArea->subWindowList().begin();it!=ui->mdiArea->subWindowList().end();it++) {
             // if(dynamic_cast<QPlotWindow*>(*it)->getPlotId() == static_cast<CPlot*>(obj_)->getId()) {
                 // ui->mdiArea->setActiveSubWindow((*it));

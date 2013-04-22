@@ -81,6 +81,7 @@
     <property name="title">
      <string>Project</string>
     </property>
+    <addaction name="actionNew_Graph"/>
     <addaction name="actionNew_data_source"/>
     <addaction name="actionNew_plot"/>
    </widget>
@@ -151,6 +152,11 @@
   <action name="actionNew_plot">
    <property name="text">
     <string>New plot</string>
+   </property>
+  </action>
+  <action name="actionNew_Graph">
+   <property name="text">
+    <string>New graph</string>
    </property>
   </action>
  </widget>

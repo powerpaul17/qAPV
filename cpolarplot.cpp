@@ -20,38 +20,6 @@ QWidget* CPolarPlot::constructSettingsWidget(QWidget* parent_) {
     return settingsWidget;
 }
 
-bool CPolarPlot::hasChildren() {
-    return false;
-}
-
-int CPolarPlot::getNChildren() {
-    return 0;
-}
-
-CObject* CPolarPlot::getChildById(long id_) {
-    return 0;
-}
-
-CObject* CPolarPlot::getChildByPosition(long pos_) {
-    return 0;
-}
-
-int CPolarPlot::getPositionOfChild(CObject* child_) {
-    return -1;
-}
-
-void CPolarPlot::addChild(CObject *child_) {
-
-}
-
-void CPolarPlot::removeChild(CObject *child_) {
-
-}
-
-void CPolarPlot::removeChild(long id_) {
-
-}
-
 void CPolarPlot::exportToXML(QXmlStreamWriter *xml_) {
     //TODO
 }
@@ -70,8 +38,4 @@ QGraphicsScene* CPolarPlot::getGraphicsScene() {
 
 CPlot* CPolarPlot::CreatePlot() {
     return new CPolarPlot();
-}
-
-void CPolarPlot::slot_childDestroyed(CObject *child_) {
-
 }

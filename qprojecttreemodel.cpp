@@ -66,7 +66,7 @@ int QProjectTreeModel::rowCount(const QModelIndex& parent) const {
 }
 
 int QProjectTreeModel::columnCount(const QModelIndex& parent) const {
-    return 1;
+    return 2;
 }
 
 QVariant QProjectTreeModel::data(const QModelIndex& index,int role) const {
@@ -77,19 +77,34 @@ QVariant QProjectTreeModel::data(const QModelIndex& index,int role) const {
             return QVariant();
         } else {
             CObject* obj=static_cast<CObject*>(index.internalPointer());
-            return QVariant(obj->getName());
+            if(index.column() == 0) {
+                return QVariant(obj->getName());
+            } else if(index.column() == 1) {
+                return QVariant(obj->getType());
+            }
         }
     }
 }
 
 Qt::ItemFlags QProjectTreeModel::flags(const QModelIndex& index) const {
     if(!index.isValid()) return 0;
-        return Qt::ItemIsEnabled | Qt::ItemIsSelectable | Qt::ItemIsEditable;
+    Qt::ItemFlags flags = Qt::ItemIsEnabled | Qt::ItemIsSelectable;
+    if(index.column() == 0) {
+        flags |= Qt::ItemIsEditable;
+    } else {
+    }
+    return flags;
 }
 
 QVariant QProjectTreeModel::headerData(int section,Qt::Orientation orientation,int role) const {
     if(orientation==Qt::Horizontal && role==Qt::DisplayRole) {
-        return QVariant("Name");
+        if(section == 0) {
+            return QVariant("Name");
+        } else if(section == 1) {
+            return QVariant("Type");
+        } else {
+            return QVariant();
+        }
     } else {
         return QVariant();
     }

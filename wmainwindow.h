@@ -37,6 +37,7 @@ public slots:
     void on_actionSave_project_as_triggered();
     void on_actionClose_project_triggered();
 
+    void on_actionNew_graph_triggered();
     void on_actionNew_data_source_triggered();
     void on_actionNew_plot_triggered();
 

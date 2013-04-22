@@ -23,14 +23,15 @@ SOURCES += main.cpp\
     cdata.cpp \
     qadddatasourcedialog.cpp \
     cdatasourcefactory.cpp \
-    qplotwindow.cpp \
     cplot.cpp \
     caxis.cpp \
     c2dplot.cpp \
     qaddplotdialog.cpp \
     cplotfactory.cpp \
     c3dplot.cpp \
-    cpolarplot.cpp
+    cpolarplot.cpp \
+    cgraph.cpp \
+    qplotwindow.cpp
 
 HEADERS  += wmainwindow.h \
     cproject.h \
@@ -43,14 +44,15 @@ HEADERS  += wmainwindow.h \
     caudiodata.h \
     qadddatasourcedialog.h \
     cdatasourcefactory.h \
-    qplotwindow.h \
     cplot.h \
     caxis.h \
     c2dplot.h \
     c3dplot.h \
     cpolarplot.h \
     qaddplotdialog.h \
-    cplotfactory.h
+    cplotfactory.h \
+    cgraph.h \
+    qplotwindow.h
 
 FORMS    += wmainwindow.ui \
     qadddatasourcedialog.ui \

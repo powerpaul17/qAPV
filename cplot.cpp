@@ -1,7 +1,7 @@
 #include "cplot.h"
 
 CPlot::CPlot(QString plotType_) {
-    this->type = Plot;
+    this->type = "Plot";
     this->name = "Plot";
     this->plotType = plotType_;
 
