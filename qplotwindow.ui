@@ -17,9 +17,6 @@
    <item>
     <widget class="QGraphicsView" name="graphicsView"/>
    </item>
-   <item>
-    <widget class="QWidget" name="settingsWidget" native="true"/>
-   </item>
   </layout>
  </widget>
  <resources/>

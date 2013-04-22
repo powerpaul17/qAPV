@@ -44,13 +44,21 @@ public:
     virtual CObject* getChildById(long id_) = 0;
     virtual CObject* getChildByPosition(long pos_) = 0;
     virtual int getPositionOfChild(CObject* child_) = 0;
+    virtual void addChild(CObject* child_) = 0;
+    virtual void removeChild(CObject* child_) = 0;
+    virtual void removeChild(long id_) = 0;
 
     virtual void exportToXML(QXmlStreamWriter* xml_) = 0;
     virtual void constructFromXML(QXmlStreamReader* xml_) = 0;
 
 signals:
 
+    void signal_objectDestroyed(CObject* obj_);
     void signal_nameChanged();
+
+public slots:
+
+    virtual void slot_childDestroyed(CObject* child_) = 0;
 
 };
 

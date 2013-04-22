@@ -24,16 +24,17 @@ QAddPlotDialog::QAddPlotDialog(QWidget *parent) :
 
 QAddPlotDialog::~QAddPlotDialog()
 {
-    ui->settingsWidget->setParent(0);
+    //ui->settingsWidget->setParent(0);
     delete ui;
 }
 
 void QAddPlotDialog::comboBoxIndexChanged(QString text_) {
     delete newPlot;
     newPlot = plotFactory.createPlot(text_);
-    ui->settingsWidget->close();
-    ui->settingsWidget = newPlot->getSettingsWidget();
-    ui->verticalLayout->insertWidget(1,ui->settingsWidget);
+    this->findChild<QWidget*>("settingsWidget")->close();
+    //ui->settingsWidget = newPlot->getSettingsWidget();
+    //newPlot->getSettingsWidget(this);
+    ui->verticalLayout->insertWidget(1,newPlot->getSettingsWidget(this));
     ui->verticalLayout->update();
 }
 

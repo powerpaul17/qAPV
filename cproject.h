@@ -26,6 +26,9 @@ public:
     CObject* getChildById(long id_);
     CObject* getChildByPosition(long pos_);
     int getPositionOfChild(CObject* child_);
+    void addChild(CObject *child_);
+    void removeChild(CObject* child_);
+    void removeChild(long id_);
 
     void exportToXML(QXmlStreamWriter* xml_);
     void constructFromXML(QXmlStreamReader* xml_);
@@ -38,11 +41,13 @@ public:
     bool isChanged();
     void setChanged(bool changed_ = true);
 
-    void addChild(CObject* child_);
-
 //signals:
 
     //void projectChanged();
+
+public slots:
+
+    virtual void slot_childDestroyed(CObject *child_);
 
 };
 

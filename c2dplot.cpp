@@ -7,19 +7,21 @@ C2DPlot::C2DPlot():CPlot("2D") {
     this->name = "2D Plot";
     x.setName("x");
     y.setName("y");
-    constructSettingsWidget();
+    //constructSettingsWidget();
+    scene = new QGraphicsScene();
 }
 
 C2DPlot::~C2DPlot() {
-
+    delete scene;
 }
 
-void C2DPlot::constructSettingsWidget() {
+QWidget* C2DPlot::constructSettingsWidget(QWidget* parent_) {
     QUiLoader loader;
     QFile file("c2dplot_settings.ui");
     file.open(QFile::ReadOnly);
-    settingsWidget = loader.load(&file);
+    QWidget* settingsWidget = loader.load(&file,parent_);
     file.close();
+    return settingsWidget;
 }
 
 bool C2DPlot::hasChildren() {
@@ -40,6 +42,18 @@ CObject* C2DPlot::getChildByPosition(long pos_) {
 
 int C2DPlot::getPositionOfChild(CObject* child_) {
     return -1;
+}
+
+void C2DPlot::addChild(CObject *child_) {
+
+}
+
+void C2DPlot::removeChild(CObject *child_) {
+
+}
+
+void C2DPlot::removeChild(long id_) {
+
 }
 
 void C2DPlot::exportToXML(QXmlStreamWriter* xml_) {
@@ -70,14 +84,18 @@ void C2DPlot::constructFromXML(QXmlStreamReader *xml_) {
     xml_->skipCurrentElement();
 }
 
-QWidget* C2DPlot::getSettingsWidget() {
-    return settingsWidget;
+QWidget* C2DPlot::getSettingsWidget(QWidget *parent_) {
+    return constructSettingsWidget(parent_);
 }
 
-void C2DPlot::drawPlot(QGraphicsScene *scene_) {
-    //TODO
+QGraphicsScene* C2DPlot::getGraphicsScene() {
+    return scene;
 }
 
 CPlot* C2DPlot::CreatePlot() {
     return new C2DPlot();
+}
+
+void C2DPlot::slot_childDestroyed(CObject *child_) {
+
 }

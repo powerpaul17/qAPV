@@ -26,8 +26,8 @@ public:
     //CPlot(PlotType plotType_);
     CPlot(QString plotType_);
 
-    virtual QWidget* getSettingsWidget() = 0;
-    virtual void drawPlot(QGraphicsScene* scene_) = 0;
+    virtual QWidget* getSettingsWidget(QWidget* parent) = 0;
+    virtual QGraphicsScene* getGraphicsScene() = 0;
 
     //int getPlotType();
     QString getPlotType();

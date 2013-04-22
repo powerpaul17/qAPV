@@ -14,7 +14,7 @@ CObject::CObject(CObject* parent_, ObjectType type_, long id_, QString name_) : 
 }
 
 CObject::~CObject() {
-
+    emit signal_objectDestroyed(this);
 }
 
 void CObject::setId(long id_) {

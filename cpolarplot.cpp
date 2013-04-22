@@ -4,19 +4,20 @@
 
 CPolarPlot::CPolarPlot():CPlot("Polar") {
     this->name = "Polarplot";
-    constructSettingsWidget();
+    scene = new QGraphicsScene();
 }
 
 CPolarPlot::~CPolarPlot() {
-
+    delete scene;
 }
 
-void CPolarPlot::constructSettingsWidget() {
+QWidget* CPolarPlot::constructSettingsWidget(QWidget* parent_) {
     QUiLoader loader;
     QFile file("cpolarplot_settings.ui");
     file.open(QFile::ReadOnly);
-    settingsWidget = loader.load(&file);
+    QWidget* settingsWidget = loader.load(&file,parent_);
     file.close();
+    return settingsWidget;
 }
 
 bool CPolarPlot::hasChildren() {
@@ -39,6 +40,18 @@ int CPolarPlot::getPositionOfChild(CObject* child_) {
     return -1;
 }
 
+void CPolarPlot::addChild(CObject *child_) {
+
+}
+
+void CPolarPlot::removeChild(CObject *child_) {
+
+}
+
+void CPolarPlot::removeChild(long id_) {
+
+}
+
 void CPolarPlot::exportToXML(QXmlStreamWriter *xml_) {
     //TODO
 }
@@ -47,14 +60,18 @@ void CPolarPlot::constructFromXML(QXmlStreamReader *xml_) {
     //TODO
 }
 
-QWidget* CPolarPlot::getSettingsWidget() {
-    return settingsWidget;
+QWidget* CPolarPlot::getSettingsWidget(QWidget *parent_) {
+    return constructSettingsWidget(parent_);
 }
 
-void CPolarPlot::drawPlot(QGraphicsScene *scene_) {
-    //TODO
+QGraphicsScene* CPolarPlot::getGraphicsScene() {
+    return scene;
 }
 
 CPlot* CPolarPlot::CreatePlot() {
     return new CPolarPlot();
+}
+
+void CPolarPlot::slot_childDestroyed(CObject *child_) {
+
 }

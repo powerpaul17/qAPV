@@ -4,19 +4,20 @@
 
 C3DPlot::C3DPlot():CPlot("3D") {
     this->name = "3D Plot";
-    constructSettingsWidget();
+    scene = new QGraphicsScene();
 }
 
 C3DPlot::~C3DPlot() {
-
+    delete scene;
 }
 
-void C3DPlot::constructSettingsWidget() {
+QWidget* C3DPlot::constructSettingsWidget(QWidget* parent_) {
     QUiLoader loader;
     QFile file("c3dplot_settings.ui");
     file.open(QFile::ReadOnly);
-    settingsWidget = loader.load(&file);
+    QWidget* settingsWidget = loader.load(&file,parent_);
     file.close();
+    return settingsWidget;
 }
 
 bool C3DPlot::hasChildren() {
@@ -39,6 +40,18 @@ int C3DPlot::getPositionOfChild(CObject* child_) {
     return -1;
 }
 
+void C3DPlot::addChild(CObject *child_) {
+
+}
+
+void C3DPlot::removeChild(CObject *child_) {
+
+}
+
+void C3DPlot::removeChild(long id_) {
+
+}
+
 void C3DPlot::exportToXML(QXmlStreamWriter *xml_) {
     //TODO
 }
@@ -47,14 +60,18 @@ void C3DPlot::constructFromXML(QXmlStreamReader *xml_) {
     //TODO
 }
 
-QWidget* C3DPlot::getSettingsWidget() {
-    return settingsWidget;
+QWidget* C3DPlot::getSettingsWidget(QWidget *parent_) {
+    return constructSettingsWidget(parent_);
 }
 
-void C3DPlot::drawPlot(QGraphicsScene *scene_) {
-    //TODO
+QGraphicsScene* C3DPlot::getGraphicsScene() {
+    return scene;
 }
 
 CPlot* C3DPlot::CreatePlot() {
     return new C3DPlot();
+}
+
+void C3DPlot::slot_childDestroyed(CObject *child_) {
+
 }

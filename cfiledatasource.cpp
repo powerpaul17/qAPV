@@ -46,6 +46,18 @@ int CFileDataSource::getPositionOfChild(CObject* child_) {
     return -1;
 }
 
+void CFileDataSource::addChild(CObject *child_) {
+
+}
+
+void CFileDataSource::removeChild(CObject *child_) {
+
+}
+
+void CFileDataSource::removeChild(long id_) {
+
+}
+
 void CFileDataSource::exportToXML(QXmlStreamWriter *xml_) {
     xml_->writeStartElement("DataSource");
     xml_->writeAttribute("name",this->getName());
@@ -95,3 +107,6 @@ CDataSource* CFileDataSource::CreateDataSource() {
     return new CFileDataSource();
 }
 
+void CFileDataSource::slot_childDestroyed(CObject *child_) {
+
+}

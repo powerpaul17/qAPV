@@ -164,8 +164,21 @@ void CProject::addChild(CObject* child_) {
     currId++;
     children.append(child_);
     setChanged();
+    //TODO
+}
+
+void CProject::removeChild(CObject *child_) {
+    //TODO
+}
+
+void CProject::removeChild(long id_) {
+    //TODO
 }
 
 /*void CProject::projectChanged() {
     //TODO
 }*/
+
+void CProject::slot_childDestroyed(CObject *child_) {
+    //TODO
+}

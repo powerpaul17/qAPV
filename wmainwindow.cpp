@@ -141,12 +141,15 @@ void WMainWindow::closeEvent(QCloseEvent *event) {
 void WMainWindow::slot_treeView_itemActivated(QModelIndex index_) {
     CObject* obj_ = static_cast<CObject*>(index_.internalPointer());
     if(obj_->getType() == CObject::Plot) {
-        for(QList<QMdiSubWindow*>::Iterator it = ui->mdiArea->subWindowList().begin();it!=ui->mdiArea->subWindowList().end();it++) {
+        //for(QList<QMdiSubWindow*>::Iterator it = ui->mdiArea->subWindowList().begin();it!=ui->mdiArea->subWindowList().end();it++) {
             // if(dynamic_cast<QPlotWindow*>(*it)->getPlotId() == static_cast<CPlot*>(obj_)->getId()) {
                 // ui->mdiArea->setActiveSubWindow((*it));
                 // TODO
             //}
-        }
-        ui->mdiArea->addSubWindow(new QPlotWindow(static_cast<CPlot*>(obj_),ui->mdiArea));
+        //}
+        QPlotWindow* newSubWindow = new QPlotWindow(static_cast<CPlot*>(obj_));
+        newSubWindow->setAttribute(Qt::WA_DeleteOnClose,true);
+        ui->mdiArea->addSubWindow(newSubWindow);
+        newSubWindow->showMaximized();
     }
 }

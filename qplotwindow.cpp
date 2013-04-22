@@ -7,14 +7,9 @@ QPlotWindow::QPlotWindow(CPlot* plot_,QWidget *parent) :
 {
     ui->setupUi(this);
 
-    //graphicsView = findChild<QGraphicsView*>("graphicsView");
-
     this->plot = plot_;
 
-    ui->settingsWidget->close();
-    ui->settingsWidget = plot->getSettingsWidget();
-    ui->horizontalLayout->addWidget(ui->settingsWidget);
-    ui->horizontalLayout->update();
+    ui->graphicsView->setScene(plot->getGraphicsScene());
 
     this->setWindowTitle(plot->getName());
 
@@ -22,7 +17,7 @@ QPlotWindow::QPlotWindow(CPlot* plot_,QWidget *parent) :
 }
 
 QPlotWindow::~QPlotWindow() {
-    ui->settingsWidget->setParent(0);
+    ui->graphicsView->setScene(0);
     delete ui;
 }
 
