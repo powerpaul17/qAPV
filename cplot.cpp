@@ -1,23 +1,23 @@
 #include "cplot.h"
 
 CPlot::CPlot(QString plotType_) {
-    this->type = "Plot";
-    this->name = "Plot";
-    this->plotType = plotType_;
+    m_type = "Plot";
+    m_name = "Plot";
+    m_plotType = plotType_;
 
-    dataSeries.clear();
+    m_dataSeries.clear();
 }
 
 QString CPlot::getPlotType() {
-    return plotType;
+    return m_plotType;
 }
 
 void CPlot::addDataSeries(CData *dataSeries_) {
-    dataSeries.append(dataSeries_);
+    m_dataSeries.append(dataSeries_);
 }
 
 void CPlot::removeDataSeries(int id_) {
-    if((id_>=0) && (id_<dataSeries.size())) {
-        dataSeries.removeAt(id_);
+    if((id_>=0) && (id_<m_dataSeries.size())) {
+        m_dataSeries.removeAt(id_);
     }
 }

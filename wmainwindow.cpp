@@ -7,6 +7,7 @@
 #include "qaddplotdialog.h"
 #include "qplotwindow.h"
 #include "cgraph.h"
+#include "caxis.h"
 
 WMainWindow::WMainWindow(QWidget *parent) :
     QMainWindow(parent),
@@ -110,6 +111,7 @@ void WMainWindow::on_actionNew_graph_triggered() {
     if(this->project != 0) {
         project->addChild(new CGraph());
         ui->treeView->expandAll();
+        project->setChanged();
     } else {
 
     }
@@ -124,6 +126,7 @@ void WMainWindow::on_actionNew_data_source_triggered() {
             //ui->treeView->repaint();
             //ui->treeView->setModel(treeModel);
             ui->treeView->expandAll();
+            project->setChanged();
         } else {
 
         }
@@ -134,14 +137,63 @@ void WMainWindow::on_actionNew_plot_triggered() {
     if(this->project != 0) {
         QAddPlotDialog dialog(this);
         if(dialog.exec() == QDialog::Accepted) {
-            project->addChild(dialog.getPlot());
+            QModelIndex index = ui->treeView->selectionModel()->currentIndex();
+            CObject* obj;
+            if(index.isValid()) {
+                obj = static_cast<CObject*>(index.internalPointer());
+            } else {
+                obj = project;
+            }
+            while(obj->getType() != "Graph") {
+                if(obj->hasParent()) {
+                    obj = obj->getParent();
+                } else {
+                    break;
+                }
+            }
+            if(obj->getType() != "Graph") {
+                obj = new CGraph();
+                project->addChild(obj);
+
+            }
+            obj->addChild(dialog.getPlot());
+
             // TODO
             //ui->treeView->repaint();
             //ui->treeView->setModel(treeModel);
             ui->treeView->expandAll();
+            project->setChanged();
         } else {
 
         }
+    }
+}
+
+void WMainWindow::on_actionNew_axis_triggered() {
+    if(this->project != 0) {
+        QModelIndex index = ui->treeView->selectionModel()->currentIndex();
+        CObject* obj;
+        if(index.isValid()) {
+            obj = static_cast<CObject*>(index.internalPointer());
+        } else {
+            obj = project;
+        }
+        while(obj->getType() != "Graph") {
+            if(obj->hasParent()) {
+                obj = obj->getParent();
+            } else {
+                break;
+            }
+        }
+        if(obj->getType() != "Graph") {
+            obj = new CGraph();
+            project->addChild(obj);
+        }
+        obj->addChild(new CAxis());
+
+        // TODO
+        ui->treeView->expandAll();
+        project->setChanged();
     }
 }
 

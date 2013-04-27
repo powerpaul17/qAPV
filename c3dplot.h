@@ -6,9 +6,9 @@
 
 class C3DPlot:public CPlot {
 
-    CAxis x,y,z;
+    CAxis m_x,m_y,m_z;
 
-    QGraphicsScene* scene;
+    QGraphicsScene* m_scene;
 
     QWidget* constructSettingsWidget(QWidget* parent_);
 

@@ -4,22 +4,26 @@
 #include <QString>
 #include <QtXml/QtXml>
 
+#include "cobjectproperties.h"
+
 class CObject : public QObject {
 
     Q_OBJECT
 
-    bool canHaveChildren;
-    QList<CObject*> children;
+    CObjectProperties m_properties;
 
-public:
+    bool m_canHaveChildren;
+    QList<CObject*> m_children;
 
 protected:
-    QString type;
-    long id;
-    QString name;
-    CObject* parent;
+
+    QString m_type;
+    long m_id;
+    QString m_name;
+    CObject* m_parent;
 
 public:
+
     CObject();
     CObject(CObject* parent_,QString type_ = "Object",long id_ = -1,QString name_ = "Object",bool canHaveChildren_ = false);
     virtual ~CObject();
@@ -52,6 +56,7 @@ signals:
 
     void signal_objectDestroyed(CObject* obj_);
     void signal_nameChanged();
+    void signal_childAdded(CObject* obj_);
 
 public slots:
 

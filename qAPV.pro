@@ -52,7 +52,9 @@ HEADERS  += wmainwindow.h \
     qaddplotdialog.h \
     cplotfactory.h \
     cgraph.h \
-    qplotwindow.h
+    qplotwindow.h \
+    cobjectproperty.h \
+    cobjectproperties.h
 
 FORMS    += wmainwindow.ui \
     qadddatasourcedialog.ui \

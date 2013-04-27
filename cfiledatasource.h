@@ -5,13 +5,11 @@
 #include "cdata.h"
 
 class CFileDataSource:public CDataSource {
-    QString filename;
+    QString m_filename;
 
-    CData* data;
+    CData* m_data;
 
-    QWidget* settingsWidget;
-
-    void constructSettingsWidget();
+    QWidget* constructSettingsWidget(QWidget* parent_);
 
 public:
     CFileDataSource();
@@ -30,7 +28,7 @@ public:
     void exportToXML(QXmlStreamWriter* xml_);
     void constructFromXML(QXmlStreamReader *xml_);
 
-    QWidget* getSettingsWidget();
+    QWidget* getSettingsWidget(QWidget* parent_);
 
     CData* getData();
 

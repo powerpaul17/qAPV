@@ -3,12 +3,12 @@
 #include "cpolarplot.h"
 
 CPolarPlot::CPolarPlot():CPlot("Polar") {
-    this->name = "Polarplot";
-    scene = new QGraphicsScene();
+    m_name = "Polarplot";
+    m_scene = new QGraphicsScene();
 }
 
 CPolarPlot::~CPolarPlot() {
-    delete scene;
+    delete m_scene;
 }
 
 QWidget* CPolarPlot::constructSettingsWidget(QWidget* parent_) {
@@ -33,7 +33,7 @@ QWidget* CPolarPlot::getSettingsWidget(QWidget *parent_) {
 }
 
 QGraphicsScene* CPolarPlot::getGraphicsScene() {
-    return scene;
+    return m_scene;
 }
 
 CPlot* CPolarPlot::CreatePlot() {

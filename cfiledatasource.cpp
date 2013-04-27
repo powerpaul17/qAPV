@@ -4,22 +4,21 @@
 #include "cfiledatasource.h"
 
 CFileDataSource::CFileDataSource():CDataSource("File",true) {
-    this->name = "FileDataSource";
-    this->filename = "";
-    constructSettingsWidget();
+    m_name = "FileDataSource";
+    m_filename = "";
 }
 
 CFileDataSource::CFileDataSource(QString filename_):CDataSource("File",true) {
-    this->filename = filename_;
-    constructSettingsWidget();
+    m_filename = filename_;
 }
 
-void CFileDataSource::constructSettingsWidget() {
+QWidget* CFileDataSource::constructSettingsWidget(QWidget* parent_) {
     QUiLoader loader;
     QFile file("cfiledatasource_settings.ui");
     file.open(QFile::ReadOnly);
-    settingsWidget = loader.load(&file);
+    QWidget* settingsWidget = loader.load(&file,parent_);
     file.close();
+    return settingsWidget;
 }
 
 CFileDataSource::~CFileDataSource() {
@@ -61,20 +60,20 @@ void CFileDataSource::removeChild(long id_) {
 void CFileDataSource::exportToXML(QXmlStreamWriter *xml_) {
     xml_->writeStartElement("DataSource");
     xml_->writeAttribute("name",this->getName());
-    xml_->writeAttribute("type",QVariant(this->type).toString());
-    xml_->writeAttribute("dataSourceType",QVariant(this->datasourcetype).toString());
-    xml_->writeAttribute("filename",QString(this->filename));
+    xml_->writeAttribute("type",QVariant(m_type).toString());
+    xml_->writeAttribute("dataSourceType",QVariant(m_datasourcetype).toString());
+    xml_->writeAttribute("filename",QString(m_filename));
     // TODO
     xml_->writeEndElement();
 }
 
 void CFileDataSource::constructFromXML(QXmlStreamReader *xml_) {
-    this->setName(xml_->attributes().value("name").toString());
-    this->filename = xml_->attributes().value("filename").toString();
+    setName(xml_->attributes().value("name").toString());
+    m_filename = xml_->attributes().value("filename").toString();
     xml_->skipCurrentElement();
 }
 
-QWidget* CFileDataSource::getSettingsWidget() {
+QWidget* CFileDataSource::getSettingsWidget(QWidget* parent_) {
 //    QTabWidget* tabwidget = new QTabWidget();
 //    QWidget* page_general = new QWidget();
 //        QGridLayout* pageGeneralGridLayout = new QGridLayout();
@@ -96,11 +95,11 @@ QWidget* CFileDataSource::getSettingsWidget() {
 //    tabwidget->addTab(page_binary,"Binary");
 
     // TODO
-    return settingsWidget;
+    return constructSettingsWidget(parent_);
 }
 
 CData* CFileDataSource::getData() {
-    return data;
+    return m_data;
 }
 
 CDataSource* CFileDataSource::CreateDataSource() {

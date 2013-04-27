@@ -6,9 +6,9 @@
 
 class CPolarPlot:public CPlot {
 
-    CAxis r,phi;
+    CAxis m_r,m_phi;
 
-    QGraphicsScene* scene;
+    QGraphicsScene* m_scene;
 
     QWidget* constructSettingsWidget(QWidget* parent_);
 

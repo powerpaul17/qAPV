@@ -6,9 +6,9 @@
 
 class C2DPlot:public CPlot {
 
-    CAxis* x,y;
+    CAxis* m_x,m_y;
 
-    QGraphicsScene* scene;
+    QGraphicsScene* m_scene;
 
     QWidget* constructSettingsWidget(QWidget* parent_);
 

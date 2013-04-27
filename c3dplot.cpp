@@ -3,12 +3,12 @@
 #include "c3dplot.h"
 
 C3DPlot::C3DPlot():CPlot("3D") {
-    this->name = "3D Plot";
-    scene = new QGraphicsScene();
+    m_name = "3D Plot";
+    m_scene = new QGraphicsScene();
 }
 
 C3DPlot::~C3DPlot() {
-    delete scene;
+    delete m_scene;
 }
 
 QWidget* C3DPlot::constructSettingsWidget(QWidget* parent_) {
@@ -33,7 +33,7 @@ QWidget* C3DPlot::getSettingsWidget(QWidget *parent_) {
 }
 
 QGraphicsScene* C3DPlot::getGraphicsScene() {
-    return scene;
+    return m_scene;
 }
 
 CPlot* C3DPlot::CreatePlot() {

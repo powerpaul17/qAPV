@@ -5,7 +5,7 @@
 
 class CData:public CObject {
 
-    QList<double> data;
+    QList<double> m_data;
 
 public:
     CData();

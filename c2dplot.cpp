@@ -4,13 +4,13 @@
 #include "c2dplot.h"
 
 C2DPlot::C2DPlot():CPlot("2D") {
-    this->name = "2D Plot";
+    m_name = "2D Plot";
     //constructSettingsWidget();
-    scene = new QGraphicsScene();
+    m_scene = new QGraphicsScene();
 }
 
 C2DPlot::~C2DPlot() {
-    delete scene;
+    delete m_scene;
 }
 
 QWidget* C2DPlot::constructSettingsWidget(QWidget* parent_) {
@@ -24,9 +24,9 @@ QWidget* C2DPlot::constructSettingsWidget(QWidget* parent_) {
 
 void C2DPlot::exportToXML(QXmlStreamWriter* xml_) {
     xml_->writeStartElement("Plot");
-    xml_->writeAttribute("name",this->getName());
-    xml_->writeAttribute("type",QVariant(this->type).toString());
-    xml_->writeAttribute("plotType",QVariant(this->getPlotType()).toString());
+    xml_->writeAttribute("name",getName());
+    xml_->writeAttribute("type",QVariant(m_type).toString());
+    xml_->writeAttribute("plotType",QVariant(getPlotType()).toString());
 
     //TODO
 
@@ -35,7 +35,7 @@ void C2DPlot::exportToXML(QXmlStreamWriter* xml_) {
 
 void C2DPlot::constructFromXML(QXmlStreamReader *xml_) {
     //TODO
-    this->setName(xml_->attributes().value("name").toString());
+    setName(xml_->attributes().value("name").toString());
     while(xml_->readNextStartElement()) {
         //if(xml_->name()=="Axis") {
 
@@ -49,7 +49,7 @@ QWidget* C2DPlot::getSettingsWidget(QWidget *parent_) {
 }
 
 QGraphicsScene* C2DPlot::getGraphicsScene() {
-    return scene;
+    return m_scene;
 }
 
 CPlot* C2DPlot::CreatePlot() {

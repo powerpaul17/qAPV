@@ -16,8 +16,8 @@ class CDataSource:public CObject {
 protected:
 
     //int datasourcetype;
-    QString datasourcetype;
-    bool isstatic;
+    QString m_datasourcetype;
+    bool m_isstatic;
 
 public:
     //CDataSource(DataSourceType datasourcetype_,bool isstatic_);
@@ -26,7 +26,7 @@ public:
     bool getIsStatic();
     void setIsStatic(bool isstatic_);
 
-    virtual QWidget* getSettingsWidget() = 0;
+    virtual QWidget* getSettingsWidget(QWidget* parent_) = 0;
 
     virtual CData* getData() = 0;
 

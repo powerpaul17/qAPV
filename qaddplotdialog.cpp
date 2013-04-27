@@ -31,10 +31,9 @@ QAddPlotDialog::~QAddPlotDialog()
 void QAddPlotDialog::comboBoxIndexChanged(QString text_) {
     delete newPlot;
     newPlot = plotFactory.createPlot(text_);
-    this->findChild<QWidget*>("settingsWidget")->close();
-    //ui->settingsWidget = newPlot->getSettingsWidget();
-    //newPlot->getSettingsWidget(this);
-    ui->verticalLayout->insertWidget(1,newPlot->getSettingsWidget(this));
+    ui->settingsWidget->close();
+    ui->settingsWidget = newPlot->getSettingsWidget(this);
+    ui->verticalLayout->insertWidget(1,ui->settingsWidget);
     ui->verticalLayout->update();
 }
 

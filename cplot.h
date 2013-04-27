@@ -8,11 +8,11 @@
 
 class CPlot:public CObject {
 
-    QString plotType;
+    QString m_plotType;
 
 protected:
 
-    QList<CData*> dataSeries;
+    QList<CData*> m_dataSeries;
 
 public:
 

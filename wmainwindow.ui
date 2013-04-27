@@ -81,8 +81,9 @@
     <property name="title">
      <string>Project</string>
     </property>
-    <addaction name="actionNew_Graph"/>
     <addaction name="actionNew_data_source"/>
+    <addaction name="actionNew_graph"/>
+    <addaction name="actionNew_axis"/>
     <addaction name="actionNew_plot"/>
    </widget>
    <addaction name="menuFile"/>
@@ -154,9 +155,14 @@
     <string>New plot</string>
    </property>
   </action>
-  <action name="actionNew_Graph">
+  <action name="actionNew_graph">
    <property name="text">
     <string>New graph</string>
+   </property>
+  </action>
+  <action name="actionNew_axis">
+   <property name="text">
+    <string>New axis</string>
    </property>
   </action>
  </widget>

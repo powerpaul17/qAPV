@@ -32,7 +32,7 @@ void QAddDataSourceDialog::comboBoxIndexChanged(QString text_) {
     delete newDataSource;
     newDataSource = dataSourceFactory.createDataSource(text_);
     ui->settingsWidget->close();
-    ui->settingsWidget = newDataSource->getSettingsWidget();
+    ui->settingsWidget = newDataSource->getSettingsWidget(this);
     ui->verticalLayout->insertWidget(1,ui->settingsWidget);
     ui->verticalLayout->update();
 }
