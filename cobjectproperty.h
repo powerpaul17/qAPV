@@ -28,7 +28,11 @@ public:
     QString getDescription();
     void setDescription(QString description_);
     QString getType();
-    QVariant getProperty();
+    QVariant getPropertyValue();
+
+    bool setPropertyValue(QString value_);
+    bool setPropertyValue(int value_);
+    bool setPropertyValue(bool value_);
 
     QWidget* returnWidget(QWidget* parent_);
 

@@ -4,7 +4,7 @@
 #include "cfiledatasource.h"
 
 CFileDataSource::CFileDataSource():CDataSource("File",true) {
-    m_name = "FileDataSource";
+    setName("FileDataSource");
     m_filename = "";
 }
 

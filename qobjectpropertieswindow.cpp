@@ -13,9 +13,7 @@ QObjectPropertiesWindow::~QObjectPropertiesWindow() {
 }
 
 void QObjectPropertiesWindow::slot_objectChanged(CObject* object_) {
-    // TODO
     QFormLayout* newLayout = object_->returnPropertiesWidget(0);
-
     QLayout* layout = this->layout();
     if (layout != 0) {
         QLayoutItem* item;

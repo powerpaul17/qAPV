@@ -5,7 +5,7 @@
 CObject::CObject() : QObject() {
     m_parent = 0;
     m_type = "Object";
-    m_name = "Object";
+    // m_name = "Object";
     m_canHaveChildren = false;
     addProperty("Name","Name","Object");
 }
@@ -14,7 +14,7 @@ CObject::CObject(CObject* parent_, QString type_, long id_, QString name_, bool 
     m_parent = parent_;
     m_type = type_;
     m_id = id_;
-    m_name = name_;
+    // m_name = name_;
     m_canHaveChildren = canHaveChildren_;
     addProperty("Name","Name",name_);
 }
@@ -32,12 +32,12 @@ long CObject::getId() {
 }
 
 void CObject::setName(QString name_) {
-    m_name = name_;
+    setProperty("Name",name_);
     emit signal_nameChanged();
 }
 
 QString CObject::getName() {
-    return m_name;
+    return m_properties.getPropertyValue("Name").toString();
 }
 
 QString CObject::getType() {
@@ -137,4 +137,31 @@ void CObject::addProperty(QString name_,QString description_,bool value_) {
 
 QFormLayout* CObject::returnPropertiesWidget(QWidget *parent_) {
     return m_properties.returnPropertiesWidget(parent_);
+}
+
+bool CObject::setProperty(QString name_,QString value_) {
+    if(m_properties.hasProperty(name_)) {
+        m_properties.setProperty(name_,value_);
+        return true;
+    } else {
+        return false;
+    }
+}
+
+bool CObject::setProperty(QString name_,int value_) {
+    if(m_properties.hasProperty(name_)) {
+        m_properties.setProperty(name_,value_);
+        return true;
+    } else {
+        return false;
+    }
+}
+
+bool CObject::setProperty(QString name_,bool value_) {
+    if(m_properties.hasProperty(name_)) {
+        m_properties.setProperty(name_,value_);
+        return true;
+    } else {
+        return false;
+    }
 }

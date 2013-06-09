@@ -1,8 +1,8 @@
 #include "cdatasource.h"
 
-CDataSource::CDataSource(QString datasourcetype_,bool isstatic_) {
+CDataSource::CDataSource(QString datasourcetype_,bool isstatic_):CObject(0,"Datasource") {
     m_type = "Datasource";
-    m_name = "Plot";
+    // m_name = "Plot";
     m_datasourcetype = datasourcetype_;
     m_isstatic = isstatic_;
 }

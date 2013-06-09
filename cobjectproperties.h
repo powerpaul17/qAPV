@@ -18,7 +18,11 @@ public:
     virtual ~CObjectProperties();
 
     void addProperty(CObjectProperty *property_);
-    QVariant getProperty(QString name_);
+    QVariant getPropertyValue(QString name_);
+    bool hasProperty(QString name_);
+    bool setProperty(QString name_,QString value_);
+    bool setProperty(QString name_,int value_);
+    bool setProperty(QString name_,bool value_);
 
     QFormLayout *returnPropertiesWidget(QWidget* parent_);
 

@@ -58,8 +58,35 @@ QString CObjectProperty::getType() {
     return m_type;
 }
 
-QVariant CObjectProperty::getProperty() {
+QVariant CObjectProperty::getPropertyValue() {
     return m_property;
+}
+
+bool CObjectProperty::setPropertyValue(QString value_) {
+    if(m_type == "string") {
+        m_property = value_;
+        return true;
+    } else {
+        return false;
+    }
+}
+
+bool CObjectProperty::setPropertyValue(int value_) {
+    if(m_type == "int") {
+        m_property = value_;
+        return true;
+    } else {
+        return false;
+    }
+}
+
+bool CObjectProperty::setPropertyValue(bool value_) {
+    if(m_type == "bool") {
+        m_property = value_;
+        return true;
+    } else {
+        return false;
+    }
 }
 
 QWidget* CObjectProperty::returnWidget(QWidget *parent_) {

@@ -1,8 +1,8 @@
 #include "cplot.h"
 
-CPlot::CPlot(QString plotType_) {
+CPlot::CPlot(QString plotType_):CObject(0,"Plot") {
     m_type = "Plot";
-    m_name = "Plot";
+    // setName("Plot");
     m_plotType = plotType_;
 
     m_dataSeries.clear();

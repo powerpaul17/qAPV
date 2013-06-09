@@ -13,8 +13,51 @@ void CObjectProperties::addProperty(CObjectProperty* property_) {
     emit signal_propertyAdded(property_);
 }
 
-QVariant CObjectProperties::getProperty(QString name_) {
-    return m_properties[name_]->getProperty();
+QVariant CObjectProperties::getPropertyValue(QString name_) {
+    return m_properties[name_]->getPropertyValue();
+}
+
+bool CObjectProperties::hasProperty(QString name_) {
+    return m_properties.contains(name_);
+}
+
+bool CObjectProperties::setProperty(QString name_,QString value_) {
+    if(hasProperty(name_)) {
+        if(m_properties[name_]->getType() == "string") {
+            m_properties[name_]->setPropertyValue(value_);
+            return true;
+        } else {
+            return false;
+        }
+    } else {
+        return false;
+    }
+}
+
+bool CObjectProperties::setProperty(QString name_,int value_) {
+    if(hasProperty(name_)) {
+        if(m_properties[name_]->getType() == "int") {
+            m_properties[name_]->setPropertyValue(value_);
+            return true;
+        } else {
+            return false;
+        }
+    } else {
+        return false;
+    }
+}
+
+bool CObjectProperties::setProperty(QString name_,bool value_) {
+    if(hasProperty(name_)) {
+        if(m_properties[name_]->getType() == "bool") {
+            m_properties[name_]->setPropertyValue(value_);
+            return true;
+        } else {
+            return false;
+        }
+    } else {
+        return false;
+    }
 }
 
 QFormLayout *CObjectProperties::returnPropertiesWidget(QWidget *parent_) {

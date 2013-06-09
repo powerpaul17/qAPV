@@ -4,7 +4,7 @@
 #include "c2dplot.h"
 
 C2DPlot::C2DPlot():CPlot("2D") {
-    m_name = "2D Plot";
+    setName("2D Plot");
     //constructSettingsWidget();
     m_scene = new QGraphicsScene();
 }

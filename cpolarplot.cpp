@@ -3,7 +3,7 @@
 #include "cpolarplot.h"
 
 CPolarPlot::CPolarPlot():CPlot("Polar") {
-    m_name = "Polarplot";
+    setName("Polarplot");
     m_scene = new QGraphicsScene();
 }
 

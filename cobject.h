@@ -20,7 +20,7 @@ protected:
 
     QString m_type;
     long m_id;
-    QString m_name;
+    // QString m_name;
     CObject* m_parent;
 
 public:
@@ -59,6 +59,10 @@ public:
     void addProperty(QString name_,QString description_,bool value_);
 
     QFormLayout *returnPropertiesWidget(QWidget* parent_);
+
+    bool setProperty(QString name_,QString value_);
+    bool setProperty(QString name_,int value_);
+    bool setProperty(QString name_,bool value_);
 
 signals:
 

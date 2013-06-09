@@ -3,7 +3,7 @@
 #include "c3dplot.h"
 
 C3DPlot::C3DPlot():CPlot("3D") {
-    m_name = "3D Plot";
+    setName("3D Plot");
     m_scene = new QGraphicsScene();
 }
 
