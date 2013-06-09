@@ -1,3 +1,5 @@
+#include <QtWidgets>
+
 #include "cobject.h"
 
 CObject::CObject() : QObject() {
@@ -5,6 +7,7 @@ CObject::CObject() : QObject() {
     m_type = "Object";
     m_name = "Object";
     m_canHaveChildren = false;
+    addProperty("Name","Name","Object");
 }
 
 CObject::CObject(CObject* parent_, QString type_, long id_, QString name_, bool canHaveChildren_) : QObject(parent_) {
@@ -13,6 +16,7 @@ CObject::CObject(CObject* parent_, QString type_, long id_, QString name_, bool 
     m_id = id_;
     m_name = name_;
     m_canHaveChildren = canHaveChildren_;
+    addProperty("Name","Name",name_);
 }
 
 CObject::~CObject() {
@@ -110,4 +114,27 @@ void CObject::removeChild(long id_) {
 
 void CObject::slot_childDestroyed(CObject *child_) {
     removeChild(child_);
+}
+
+void CObject::addProperty(CObjectProperty* property_) {
+    m_properties.addProperty(property_);
+}
+
+void CObject::addProperty(QString name_,QString description_,QString value_) {
+    CObjectProperty* newProperty = new CObjectProperty(name_,description_,value_);
+    m_properties.addProperty(newProperty);
+}
+
+void CObject::addProperty(QString name_,QString description_,int value_) {
+    CObjectProperty* newProperty = new CObjectProperty(name_,description_,value_);
+    m_properties.addProperty(newProperty);
+}
+
+void CObject::addProperty(QString name_,QString description_,bool value_) {
+    CObjectProperty* newProperty = new CObjectProperty(name_,description_,value_);
+    m_properties.addProperty(newProperty);
+}
+
+QFormLayout* CObject::returnPropertiesWidget(QWidget *parent_) {
+    return m_properties.returnPropertiesWidget(parent_);
 }

@@ -27,6 +27,7 @@ WMainWindow::WMainWindow(QWidget *parent) :
     QObject::connect(this,SIGNAL(signalProjectOpened(bool)),findChild<QAction*>("actionSave_project_as"),SLOT(setEnabled(bool)));
 
     QObject::connect(ui->treeView,SIGNAL(activated(QModelIndex)),this,SLOT(slot_treeView_itemActivated(QModelIndex)));
+    QObject::connect(ui->treeView,SIGNAL(clicked(QModelIndex)),this,SLOT(slot_treeView_itemClicked(QModelIndex)));
 
     this->project = 0;
 
@@ -215,4 +216,9 @@ void WMainWindow::slot_treeView_itemActivated(QModelIndex index_) {
         ui->mdiArea->addSubWindow(newSubWindow);
         newSubWindow->showMaximized();
     }
+}
+
+void WMainWindow::slot_treeView_itemClicked(QModelIndex index_) {
+    CObject* obj_ = static_cast<CObject*>(index_.internalPointer());
+    ui->objectPropertiesWidget->slot_objectChanged(obj_);
 }

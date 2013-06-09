@@ -81,6 +81,8 @@ QVariant QProjectTreeModel::data(const QModelIndex& index,int role) const {
                 return QVariant(obj->getName());
             } else if(index.column() == 1) {
                 return QVariant(obj->getType());
+            } else {
+                return QVariant();
             }
         }
     }

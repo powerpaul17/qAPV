@@ -43,6 +43,7 @@ public slots:
     void on_actionNew_axis_triggered();
 
     void slot_treeView_itemActivated(QModelIndex index_);
+    void slot_treeView_itemClicked(QModelIndex index_);
     
 private:
     Ui::WMainWindow *ui;

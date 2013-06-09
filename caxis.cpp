@@ -1,7 +1,7 @@
 #include "caxis.h"
 
 CAxis::CAxis():CObject(0,"Axis",-1,"Axis") {
-
+    //addProperty("Name","Name of Axis","Axis");
 }
 
 CAxis::~CAxis() {

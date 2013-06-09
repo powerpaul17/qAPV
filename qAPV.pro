@@ -31,7 +31,10 @@ SOURCES += main.cpp\
     c3dplot.cpp \
     cpolarplot.cpp \
     cgraph.cpp \
-    qplotwindow.cpp
+    qplotwindow.cpp \
+    cobjectproperty.cpp \
+    cobjectproperties.cpp \
+    qobjectpropertieswindow.cpp
 
 HEADERS  += wmainwindow.h \
     cproject.h \
@@ -54,7 +57,8 @@ HEADERS  += wmainwindow.h \
     cgraph.h \
     qplotwindow.h \
     cobjectproperty.h \
-    cobjectproperties.h
+    cobjectproperties.h \
+    qobjectpropertieswindow.h
 
 FORMS    += wmainwindow.ui \
     qadddatasourcedialog.ui \

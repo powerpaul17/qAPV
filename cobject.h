@@ -3,6 +3,7 @@
 
 #include <QString>
 #include <QtXml/QtXml>
+#include <QWidget>
 
 #include "cobjectproperties.h"
 
@@ -51,6 +52,13 @@ public:
 
     virtual void exportToXML(QXmlStreamWriter* xml_) = 0;
     virtual void constructFromXML(QXmlStreamReader* xml_) = 0;
+
+    void addProperty(CObjectProperty* property_);
+    void addProperty(QString name_,QString description_,QString value_);
+    void addProperty(QString name_,QString description_,int value_);
+    void addProperty(QString name_,QString description_,bool value_);
+
+    QFormLayout *returnPropertiesWidget(QWidget* parent_);
 
 signals:
 

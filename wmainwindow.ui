@@ -14,7 +14,7 @@
    <string>WMainWindow</string>
   </property>
   <widget class="QWidget" name="centralWidget">
-   <layout class="QVBoxLayout" name="verticalLayout">
+   <layout class="QHBoxLayout" name="horizontalLayout">
     <item>
      <widget class="QSplitter" name="splitter">
       <property name="sizePolicy">
@@ -47,6 +47,7 @@
         <enum>QTabWidget::South</enum>
        </property>
       </widget>
+      <widget class="QObjectPropertiesWindow" name="objectPropertiesWidget" native="true"/>
      </widget>
     </item>
    </layout>
@@ -172,6 +173,12 @@
    <class>QProjectTreeView</class>
    <extends>QTreeView</extends>
    <header>qprojecttreeview.h</header>
+  </customwidget>
+  <customwidget>
+   <class>QObjectPropertiesWindow</class>
+   <extends>QWidget</extends>
+   <header>qobjectpropertieswindow.h</header>
+   <container>1</container>
   </customwidget>
  </customwidgets>
  <resources/>
