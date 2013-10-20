@@ -22,17 +22,6 @@ QWidget* C2DPlot::constructSettingsWidget(QWidget* parent_) {
     return settingsWidget;
 }
 
-void C2DPlot::exportToXML(QXmlStreamWriter* xml_) {
-    xml_->writeStartElement("Plot");
-    xml_->writeAttribute("name",getName());
-    xml_->writeAttribute("type",QVariant(m_type).toString());
-    xml_->writeAttribute("plotType",QVariant(getPlotType()).toString());
-
-    //TODO
-
-    xml_->writeEndElement();
-}
-
 void C2DPlot::constructFromXML(QXmlStreamReader *xml_) {
     //TODO
     setName(xml_->attributes().value("name").toString());

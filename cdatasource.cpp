@@ -1,16 +1,14 @@
 #include "cdatasource.h"
 
 CDataSource::CDataSource(QString datasourcetype_,bool isstatic_):CObject(0,"Datasource") {
-    m_type = "Datasource";
-    // m_name = "Plot";
-    m_datasourcetype = datasourcetype_;
-    m_isstatic = isstatic_;
+    addProperty("datasourcetype","Datasource Type","Datasource Type",datasourcetype_,false,false);
+    addProperty("isstatic","Static?","Static data source?",isstatic_,true,true);
 }
 
 bool CDataSource::getIsStatic() {
-    return m_isstatic;
+    return getBoolPropertyValue("isstatic");
 }
 
 void CDataSource::setIsStatic(bool isstatic_) {
-    m_isstatic = isstatic_;
+    setPropertyValue("isstatic",isstatic_);
 }

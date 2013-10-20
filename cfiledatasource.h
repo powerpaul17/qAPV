@@ -5,8 +5,6 @@
 #include "cdata.h"
 
 class CFileDataSource:public CDataSource {
-    QString m_filename;
-
     CData* m_data;
 
     QWidget* constructSettingsWidget(QWidget* parent_);
@@ -25,7 +23,6 @@ public:
     void removeChild(CObject *child_);
     void removeChild(long id_);
 
-    void exportToXML(QXmlStreamWriter* xml_);
     void constructFromXML(QXmlStreamReader *xml_);
 
     QWidget* getSettingsWidget(QWidget* parent_);

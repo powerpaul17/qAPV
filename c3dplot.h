@@ -17,7 +17,6 @@ public:
     C3DPlot();
     virtual ~C3DPlot();
 
-    void exportToXML(QXmlStreamWriter* xml_);
     void constructFromXML(QXmlStreamReader *xml_);
 
     QWidget* getSettingsWidget(QWidget* parent_);

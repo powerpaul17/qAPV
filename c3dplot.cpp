@@ -20,10 +20,6 @@ QWidget* C3DPlot::constructSettingsWidget(QWidget* parent_) {
     return settingsWidget;
 }
 
-void C3DPlot::exportToXML(QXmlStreamWriter *xml_) {
-    //TODO
-}
-
 void C3DPlot::constructFromXML(QXmlStreamReader *xml_) {
     //TODO
 }

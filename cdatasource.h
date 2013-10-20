@@ -13,12 +13,6 @@
 
 class CDataSource:public CObject {
 
-protected:
-
-    //int datasourcetype;
-    QString m_datasourcetype;
-    bool m_isstatic;
-
 public:
     //CDataSource(DataSourceType datasourcetype_,bool isstatic_);
     CDataSource(QString datasourcetype_,bool isstatic_);

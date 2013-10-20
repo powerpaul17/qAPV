@@ -18,7 +18,7 @@ class CObject : public QObject {
 
 protected:
 
-    QString m_type;
+    // QString m_type;
     long m_id;
     // QString m_name;
     CObject* m_parent;
@@ -26,11 +26,11 @@ protected:
 public:
 
     CObject();
-    CObject(CObject* parent_,QString type_ = "Object",long id_ = -1,QString name_ = "Object",bool canHaveChildren_ = false);
+    CObject(CObject* parent_, QString type_ = "Object", qlonglong id_ = -1, QString name_ = "Object", bool canHaveChildren_ = false);
     virtual ~CObject();
 
     void setId(long id_);
-    long getId();
+    qlonglong getId();
     void setName(QString name_);
     QString getName();
     QString getType();
@@ -50,19 +50,23 @@ public:
     void removeChild(CObject* child_);
     void removeChild(long id_);
 
-    virtual void exportToXML(QXmlStreamWriter* xml_) = 0;
-    virtual void constructFromXML(QXmlStreamReader* xml_) = 0;
+    void exportToXML(QXmlStreamWriter* xml_);
+    void constructFromXML(QXmlStreamReader* xml_);
 
     void addProperty(CObjectProperty* property_);
-    void addProperty(QString name_,QString description_,QString value_);
-    void addProperty(QString name_,QString description_,int value_);
-    void addProperty(QString name_,QString description_,bool value_);
+    void addProperty(QString name_, QString title_, QString description_,QString value_,bool visible_ = true, bool editable_ = true);
+    void addProperty(QString name_, QString title_, QString description_, qlonglong value_, bool visible_ = true, bool editable_ = true);
+    void addProperty(QString name_, QString title_, QString description_,bool value_, bool visible_ = true, bool editable_ = true);
 
     QFormLayout *returnPropertiesWidget(QWidget* parent_);
 
-    bool setProperty(QString name_,QString value_);
-    bool setProperty(QString name_,int value_);
-    bool setProperty(QString name_,bool value_);
+    bool setPropertyValue(QString name_,QString value_);
+    bool setPropertyValue(QString name_, qlonglong value_);
+    bool setPropertyValue(QString name_,bool value_);
+
+    QString getStringPropertyValue(QString name_);
+    qlonglong getQLongLongPropertyValue(QString name_);
+    bool getBoolPropertyValue(QString name_);
 
 signals:
 

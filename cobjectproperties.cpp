@@ -34,9 +34,9 @@ bool CObjectProperties::setProperty(QString name_,QString value_) {
     }
 }
 
-bool CObjectProperties::setProperty(QString name_,int value_) {
+bool CObjectProperties::setProperty(QString name_, qlonglong value_) {
     if(hasProperty(name_)) {
-        if(m_properties[name_]->getType() == "int") {
+        if(m_properties[name_]->getType() == "longlong") {
             m_properties[name_]->setPropertyValue(value_);
             return true;
         } else {
@@ -60,12 +60,30 @@ bool CObjectProperties::setProperty(QString name_,bool value_) {
     }
 }
 
+CObjectProperty* CObjectProperties::getProperty(QString name_) {
+    if(hasProperty(name_)) {
+        return m_properties[name_];
+    } else {
+        return 0;
+    }
+}
+
+void CObjectProperties::exportPropertiesToXML(QXmlStreamWriter *xml_) {
+    QMap<QString,CObjectProperty*>::const_iterator i;
+    for(i = m_properties.begin(); i != m_properties.end(); ++i) {
+        xml_->writeStartElement(i.key());
+        xml_->writeAttribute("title",i.value()->getTitle());
+        xml_->writeAttribute("description",i.value()->getDescription());
+        xml_->writeAttribute("value",i.value()->getPropertyValue().toString());
+        xml_->writeEndElement();
+    }
+}
+
 QFormLayout *CObjectProperties::returnPropertiesWidget(QWidget *parent_) {
-    // TODO
     QFormLayout* layout = new QFormLayout();
     QMap<QString,CObjectProperty*>::const_iterator i;
     for(i = m_properties.begin();i != m_properties.end();++i) {
-        layout->addRow(i.key(),i.value()->returnWidget(0));
+        if(i.value()->isVisible()) layout->addRow(i.value()->getTitle(),i.value()->returnWidget(0));
     }
     return layout;
 }

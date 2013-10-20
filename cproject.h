@@ -9,8 +9,6 @@ class CProject:public CObject {
 
     //Q_OBJECT
 
-    QString filename;
-    QList<CObject*> children;
     bool changed;
 
     uint currId;
@@ -21,7 +19,6 @@ public:
     virtual ~CProject();
     CProject(QString filename_);
 
-    void exportToXML(QXmlStreamWriter* xml_);
     void constructFromXML(QXmlStreamReader* xml_);
 
     int loadProjectFromFile();

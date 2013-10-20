@@ -5,14 +5,11 @@
 
 class CAxis:public CObject {
 
-    bool logarithmic;
-
 public:
 
     CAxis();
     virtual ~CAxis();
 
-    void exportToXML(QXmlStreamWriter* xml_);
     void constructFromXML(QXmlStreamReader *xml_);
 
     bool isLogarithmic();

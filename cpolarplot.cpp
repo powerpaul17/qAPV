@@ -20,10 +20,6 @@ QWidget* CPolarPlot::constructSettingsWidget(QWidget* parent_) {
     return settingsWidget;
 }
 
-void CPolarPlot::exportToXML(QXmlStreamWriter *xml_) {
-    //TODO
-}
-
 void CPolarPlot::constructFromXML(QXmlStreamReader *xml_) {
     //TODO
 }

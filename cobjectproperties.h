@@ -21,8 +21,12 @@ public:
     QVariant getPropertyValue(QString name_);
     bool hasProperty(QString name_);
     bool setProperty(QString name_,QString value_);
-    bool setProperty(QString name_,int value_);
+    bool setProperty(QString name_,qlonglong value_);
     bool setProperty(QString name_,bool value_);
+
+    CObjectProperty* getProperty(QString name_);
+
+    void exportPropertiesToXML(QXmlStreamWriter* xml_);
 
     QFormLayout *returnPropertiesWidget(QWidget* parent_);
 

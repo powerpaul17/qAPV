@@ -4,22 +4,34 @@
 
 CObject::CObject() : QObject() {
     m_parent = 0;
-    m_type = "Object";
-    // m_name = "Object";
     m_canHaveChildren = false;
-    addProperty("Name","Name","Object");
+
+    m_children.clear();
+
+    addProperty("name","Name","Name","Object");
+    addProperty("type","Type","Type","Object",false,true);
+
+    QObject::connect(m_properties.getProperty("name"),SIGNAL(signal_propertyChanged(QString)),this,SIGNAL(signal_nameChanged()));
 }
 
-CObject::CObject(CObject* parent_, QString type_, long id_, QString name_, bool canHaveChildren_) : QObject(parent_) {
+CObject::CObject(CObject* parent_, QString type_, qlonglong id_, QString name_, bool canHaveChildren_) : QObject(parent_) {
     m_parent = parent_;
-    m_type = type_;
     m_id = id_;
-    // m_name = name_;
     m_canHaveChildren = canHaveChildren_;
-    addProperty("Name","Name",name_);
+
+    m_children.clear();
+
+    addProperty("name","Name","Name",name_);
+    addProperty("type","Type","Type",type_,false,false);
+
+    QObject::connect(m_properties.getProperty("name"),SIGNAL(signal_propertyChanged(QString)),this,SIGNAL(signal_nameChanged()));
 }
 
 CObject::~CObject() {
+    while(m_children.size()>0) {
+        delete m_children.takeAt(0);
+    }
+    m_children.clear();
     emit signal_objectDestroyed(this);
 }
 
@@ -27,25 +39,25 @@ void CObject::setId(long id_) {
     m_id = id_;
 }
 
-long CObject::getId() {
+qlonglong CObject::getId() {
     return m_id;
 }
 
 void CObject::setName(QString name_) {
-    setProperty("Name",name_);
+    setPropertyValue("name",name_);
     emit signal_nameChanged();
 }
 
 QString CObject::getName() {
-    return m_properties.getPropertyValue("Name").toString();
+    return m_properties.getPropertyValue("name").toString();
 }
 
 QString CObject::getType() {
-    return m_type;
+    return m_properties.getPropertyValue("type").toString();
 }
 
 void CObject::setType(QString type_) {
-    m_type = type_;
+    setProperty("type",type_);
 }
 
 void CObject::enableChildren(bool enable_) {
@@ -112,6 +124,20 @@ void CObject::removeChild(long id_) {
     m_children.removeAt(getPositionOfChild(getChildById(id_)));
 }
 
+void CObject::exportToXML(QXmlStreamWriter* xml_) {
+    //TODO
+    xml_->writeStartElement(getStringPropertyValue("type"));
+    m_properties.exportPropertiesToXML(xml_);
+    for(QList<CObject*>::iterator it = m_children.begin(); it != m_children.end(); it++) {
+        (*it)->exportToXML(xml_);
+    }
+    xml_->writeEndElement();
+}
+
+void CObject::constructFromXML(QXmlStreamReader* xml_) {
+    //TODO
+}
+
 void CObject::slot_childDestroyed(CObject *child_) {
     removeChild(child_);
 }
@@ -120,18 +146,18 @@ void CObject::addProperty(CObjectProperty* property_) {
     m_properties.addProperty(property_);
 }
 
-void CObject::addProperty(QString name_,QString description_,QString value_) {
-    CObjectProperty* newProperty = new CObjectProperty(name_,description_,value_);
+void CObject::addProperty(QString name_, QString title_, QString description_, QString value_, bool visible_, bool editable_) {
+    CObjectProperty* newProperty = new CObjectProperty(name_,title_,description_,value_,visible_,editable_);
     m_properties.addProperty(newProperty);
 }
 
-void CObject::addProperty(QString name_,QString description_,int value_) {
-    CObjectProperty* newProperty = new CObjectProperty(name_,description_,value_);
+void CObject::addProperty(QString name_, QString title_, QString description_, qlonglong value_, bool visible_, bool editable_) {
+    CObjectProperty* newProperty = new CObjectProperty(name_,title_,description_,value_,visible_,editable_);
     m_properties.addProperty(newProperty);
 }
 
-void CObject::addProperty(QString name_,QString description_,bool value_) {
-    CObjectProperty* newProperty = new CObjectProperty(name_,description_,value_);
+void CObject::addProperty(QString name_, QString title_, QString description_, bool value_, bool visible_, bool editable_) {
+    CObjectProperty* newProperty = new CObjectProperty(name_,title_,description_,value_,visible_,editable_);
     m_properties.addProperty(newProperty);
 }
 
@@ -139,7 +165,7 @@ QFormLayout* CObject::returnPropertiesWidget(QWidget *parent_) {
     return m_properties.returnPropertiesWidget(parent_);
 }
 
-bool CObject::setProperty(QString name_,QString value_) {
+bool CObject::setPropertyValue(QString name_,QString value_) {
     if(m_properties.hasProperty(name_)) {
         m_properties.setProperty(name_,value_);
         return true;
@@ -148,7 +174,7 @@ bool CObject::setProperty(QString name_,QString value_) {
     }
 }
 
-bool CObject::setProperty(QString name_,int value_) {
+bool CObject::setPropertyValue(QString name_, qlonglong value_) {
     if(m_properties.hasProperty(name_)) {
         m_properties.setProperty(name_,value_);
         return true;
@@ -157,11 +183,23 @@ bool CObject::setProperty(QString name_,int value_) {
     }
 }
 
-bool CObject::setProperty(QString name_,bool value_) {
+bool CObject::setPropertyValue(QString name_,bool value_) {
     if(m_properties.hasProperty(name_)) {
         m_properties.setProperty(name_,value_);
         return true;
     } else {
         return false;
     }
+}
+
+QString CObject::getStringPropertyValue(QString name_) {
+    return m_properties.getPropertyValue(name_).toString();
+}
+
+qlonglong CObject::getQLongLongPropertyValue(QString name_) {
+    return m_properties.getPropertyValue(name_).toLongLong();
+}
+
+bool CObject::getBoolPropertyValue(QString name_) {
+    return m_properties.getPropertyValue(name_).toBool();
 }

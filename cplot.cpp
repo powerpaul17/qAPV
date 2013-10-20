@@ -1,15 +1,13 @@
 #include "cplot.h"
 
 CPlot::CPlot(QString plotType_):CObject(0,"Plot") {
-    m_type = "Plot";
-    // setName("Plot");
-    m_plotType = plotType_;
+    addProperty("plottype","Plot Type","Plot Type",plotType_,true,false);
 
     m_dataSeries.clear();
 }
 
 QString CPlot::getPlotType() {
-    return m_plotType;
+    return getStringPropertyValue("plottype");
 }
 
 void CPlot::addDataSeries(CData *dataSeries_) {

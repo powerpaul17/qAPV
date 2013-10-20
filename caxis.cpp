@@ -1,18 +1,12 @@
 #include "caxis.h"
 
 CAxis::CAxis():CObject(0,"Axis",-1,"Axis") {
-    //addProperty("Name","Name of Axis","Axis");
+
+    addProperty("logarithmic","Logarithmic?","Is the scale of the axis logarithmic?",false);
 }
 
 CAxis::~CAxis() {
 
-}
-
-void CAxis::exportToXML(QXmlStreamWriter *xml_) {
-    xml_->writeStartElement("Axis");
-        xml_->writeAttribute("name",this->getName());
-    //TODO
-    xml_->writeEndElement();
 }
 
 void CAxis::constructFromXML(QXmlStreamReader *xml_) {

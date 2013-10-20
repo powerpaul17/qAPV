@@ -5,11 +5,12 @@
 
 CFileDataSource::CFileDataSource():CDataSource("File",true) {
     setName("FileDataSource");
-    m_filename = "";
+
+    addProperty("filename","Filename","Filename",QString(""),true,true);
 }
 
 CFileDataSource::CFileDataSource(QString filename_):CDataSource("File",true) {
-    m_filename = filename_;
+    addProperty("filename","Filename","Filename",filename_,true,true);
 }
 
 QWidget* CFileDataSource::constructSettingsWidget(QWidget* parent_) {
@@ -57,19 +58,9 @@ void CFileDataSource::removeChild(long id_) {
 
 }
 
-void CFileDataSource::exportToXML(QXmlStreamWriter *xml_) {
-    xml_->writeStartElement("DataSource");
-    xml_->writeAttribute("name",this->getName());
-    xml_->writeAttribute("type",QVariant(m_type).toString());
-    xml_->writeAttribute("dataSourceType",QVariant(m_datasourcetype).toString());
-    xml_->writeAttribute("filename",QString(m_filename));
-    // TODO
-    xml_->writeEndElement();
-}
-
 void CFileDataSource::constructFromXML(QXmlStreamReader *xml_) {
     setName(xml_->attributes().value("name").toString());
-    m_filename = xml_->attributes().value("filename").toString();
+    //m_filename = xml_->attributes().value("filename").toString();
     xml_->skipCurrentElement();
 }
 

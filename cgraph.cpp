@@ -12,10 +12,6 @@ CGraph::~CGraph() {
 
 }
 
-void CGraph::exportToXML(QXmlStreamWriter* xml_) {
-    //TODO
-}
-
 void CGraph::constructFromXML(QXmlStreamReader* xml_) {
     //TODO
 }

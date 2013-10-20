@@ -2,35 +2,21 @@
 #include "cdatasourcefactory.h"
 #include "cplotfactory.h"
 
-CProject::CProject():CObject(0,"Project",0,"Project") {
-    filename = "";
+CProject::CProject():CObject(0,"Project",0,"Project",true) {
     currId = 1;
-    children.clear();
     changed = false;
+
+    addProperty("filename","Filename","Filename",QString(""),false,true);
 }
 
 CProject::~CProject() {
-    while(children.size()>0) {
-        delete children[0];
-        children.removeFirst();
-    }
-    children.clear();
+
 }
 
 CProject::CProject(QString filename_) {
     CProject();
-    filename = filename_;
+    setProperty("filename",filename_);
     loadProjectFromFile();
-}
-
-void CProject::exportToXML(QXmlStreamWriter* xml_) {
-    xml_->writeStartElement("Project");
-    xml_->writeAttribute("name",this->getName());
-    xml_->writeAttribute("currId",QVariant(currId).toString());
-    for(QList<CObject*>::iterator it = children.begin(); it != children.end(); it++) {
-        (*it)->exportToXML(xml_);
-    }
-    xml_->writeEndElement();
 }
 
 void CProject::constructFromXML(QXmlStreamReader* xml_) {
@@ -56,7 +42,7 @@ void CProject::constructFromXML(QXmlStreamReader* xml_) {
 int CProject::loadProjectFromFile() {
     QXmlStreamReader* xml = new QXmlStreamReader();
 
-    QFile file(filename);
+    QFile file(getStringPropertyValue("filename"));
     if(file.open(QIODevice::ReadOnly)) {
         xml->setDevice(&file);
         if(xml->readNextStartElement()) {
@@ -90,7 +76,7 @@ void CProject::saveProjectToFile() {
     QXmlStreamWriter* xml = new QXmlStreamWriter();
     xml->setAutoFormatting(true);
 
-    QFile file(filename);
+    QFile file(getStringPropertyValue("filename"));
     if(file.open(QIODevice::WriteOnly)) {
         xml->setDevice(&file);
         xml->writeStartDocument();
@@ -110,11 +96,11 @@ void CProject::saveProjectToFile() {
 }
 
 QString CProject::getFilename() {
-    return filename;
+    return getStringPropertyValue("filename");
 }
 
 void CProject::setFilename(QString filename_) {
-    filename = filename_;
+    setPropertyValue("filename",filename_);
 }
 
 bool CProject::isChanged() {

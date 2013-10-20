@@ -17,7 +17,6 @@ public:
     CPolarPlot();
     virtual ~CPolarPlot();
 
-    void exportToXML(QXmlStreamWriter* xml_);
     void constructFromXML(QXmlStreamReader *xml_);
 
     QWidget* getSettingsWidget(QWidget* parent_);
