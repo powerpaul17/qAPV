@@ -1,4 +1,4 @@
-#include <QtWidgets>
+#include <QtWidgets/QtWidgets>
 
 #include "cobject.h"
 
@@ -124,18 +124,18 @@ void CObject::removeChild(long id_) {
     m_children.removeAt(getPositionOfChild(getChildById(id_)));
 }
 
-void CObject::exportToXML(QXmlStreamWriter* xml_) {
-    //TODO
-    xml_->writeStartElement(getStringPropertyValue("type"));
-    m_properties.exportPropertiesToXML(xml_);
+QDomElement CObject::exportToXML(QDomDocument *doc_, QDomElement *rootNode_) {
+    QDomElement node = doc_->createElement(getStringPropertyValue("type"));
+    m_properties.exportPropertiesToXML(doc_,&node);
     for(QList<CObject*>::iterator it = m_children.begin(); it != m_children.end(); it++) {
-        (*it)->exportToXML(xml_);
+        (*it)->exportToXML(doc_,&node);
     }
-    xml_->writeEndElement();
+    rootNode_->appendChild(node);
 }
 
-void CObject::constructFromXML(QXmlStreamReader* xml_) {
+void CObject::constructFromXML(QDomElement *node_) {
     //TODO
+
 }
 
 void CObject::slot_childDestroyed(CObject *child_) {

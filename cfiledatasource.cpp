@@ -1,5 +1,4 @@
-#include <QtUiTools/QtUiTools>
-#include <QtWidgets>
+#include <QtUiTools>
 
 #include "cfiledatasource.h"
 

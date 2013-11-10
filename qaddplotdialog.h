@@ -1,7 +1,7 @@
 #ifndef QADDPLOTDIALOG_H
 #define QADDPLOTDIALOG_H
 
-#include <QDialog>
+#include <QtWidgets/QDialog>
 
 #include "cplotfactory.h"
 

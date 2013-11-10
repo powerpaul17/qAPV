@@ -1,7 +1,7 @@
 #ifndef QPROJECTTREEVIEW_H
 #define QPROJECTTREEVIEW_H
 
-#include <QTreeView>
+#include <QtWidgets/QTreeView>
 
 class QProjectTreeView:public QTreeView {
 public:

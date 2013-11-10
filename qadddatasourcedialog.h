@@ -1,9 +1,9 @@
 #ifndef QADDDATASOURCEDIALOG_H
 #define QADDDATASOURCEDIALOG_H
 
-#include <QDialog>
-#include <QComboBox>
-#include <QVBoxLayout>
+#include <QtWidgets/QDialog>
+#include <QtWidgets/QComboBox>
+#include <QtWidgets/QVBoxLayout>
 
 #include "cdatasourcefactory.h"
 

@@ -2,7 +2,7 @@
 #define CDATASOURCE_H
 
 #include <QtGui>
-#include <QtWidgets>
+#include <QtWidgets/QtWidgets>
 
 #include "cobject.h"
 #include "cdata.h"

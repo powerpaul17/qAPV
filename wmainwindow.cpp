@@ -1,5 +1,5 @@
-#include <QMessageBox>
-#include <QFileDialog>
+//#include <QMessageBox>
+//#include <QFileDialog>
 
 #include "wmainwindow.h"
 #include "ui_wmainwindow.h"
@@ -100,6 +100,7 @@ void WMainWindow::on_actionClose_project_triggered() {
         }
         ui->mdiArea->closeAllSubWindows();
         ui->treeView->setModel(0);
+        ui->objectPropertiesWidget->slot_objectChanged(0);
         delete treeModel;
         treeModel=0;
         delete project;

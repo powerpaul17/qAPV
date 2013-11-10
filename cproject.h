@@ -1,17 +1,13 @@
 #ifndef CPROJECT_H
 #define CPROJECT_H
 
-#include <QtWidgets>
+//#include <QtWidgets>
 
 #include "cobject.h"
 
 class CProject:public CObject {
 
     //Q_OBJECT
-
-    bool changed;
-
-    uint currId;
 
 public:
 

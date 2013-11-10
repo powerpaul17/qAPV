@@ -1,8 +1,9 @@
 #ifndef COBJECTPROPERTIES_H
 #define COBJECTPROPERTIES_H
 
-#include<QMap>
-#include<QtWidgets>
+#include <QMap>
+#include <QtWidgets/QtWidgets>
+#include <QtXml/QtXml>
 
 #include "cobjectproperty.h"
 
@@ -20,13 +21,14 @@ public:
     void addProperty(CObjectProperty *property_);
     QVariant getPropertyValue(QString name_);
     bool hasProperty(QString name_);
-    bool setProperty(QString name_,QString value_);
-    bool setProperty(QString name_,qlonglong value_);
-    bool setProperty(QString name_,bool value_);
+    bool setProperty(QString name_, QString value_);
+    bool setProperty(QString name_, qlonglong value_);
+    bool setProperty(QString name_, bool value_);
 
     CObjectProperty* getProperty(QString name_);
 
-    void exportPropertiesToXML(QXmlStreamWriter* xml_);
+    //void exportPropertiesToXML(QXmlStreamWriter* xml_);
+    void exportPropertiesToXML(QDomDocument* doc_, QDomElement* node_);
 
     QFormLayout *returnPropertiesWidget(QWidget* parent_);
 

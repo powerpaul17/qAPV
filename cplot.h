@@ -1,7 +1,7 @@
 #ifndef CPLOT_H
 #define CPLOT_H
 
-#include <QtWidgets>
+#include <QtWidgets/QtWidgets>
 
 #include "cobject.h"
 #include "cdata.h"

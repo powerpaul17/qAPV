@@ -68,14 +68,15 @@ CObjectProperty* CObjectProperties::getProperty(QString name_) {
     }
 }
 
-void CObjectProperties::exportPropertiesToXML(QXmlStreamWriter *xml_) {
+void CObjectProperties::exportPropertiesToXML(QDomDocument *doc_, QDomElement *node_) {
     QMap<QString,CObjectProperty*>::const_iterator i;
+    QDomElement propertyNode;
     for(i = m_properties.begin(); i != m_properties.end(); ++i) {
-        xml_->writeStartElement(i.key());
-        xml_->writeAttribute("title",i.value()->getTitle());
-        xml_->writeAttribute("description",i.value()->getDescription());
-        xml_->writeAttribute("value",i.value()->getPropertyValue().toString());
-        xml_->writeEndElement();
+        propertyNode = doc_->createElement(i.key());
+        propertyNode.setAttribute("title",i.value()->getTitle());
+        propertyNode.setAttribute("description",i.value()->getDescription());
+        propertyNode.setAttribute("value",i.value()->getPropertyValue().toString());
+        node_->appendChild(propertyNode);
     }
 }
 

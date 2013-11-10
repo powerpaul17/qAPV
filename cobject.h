@@ -3,7 +3,7 @@
 
 #include <QString>
 #include <QtXml/QtXml>
-#include <QWidget>
+//#include <QWidget>
 
 #include "cobjectproperties.h"
 
@@ -50,8 +50,8 @@ public:
     void removeChild(CObject* child_);
     void removeChild(long id_);
 
-    void exportToXML(QXmlStreamWriter* xml_);
-    void constructFromXML(QXmlStreamReader* xml_);
+    void constructFromXML(QDomElement* node_);
+    QDomElement exportToXML(QDomDocument* doc_, QDomElement* rootNode_);
 
     void addProperty(CObjectProperty* property_);
     void addProperty(QString name_, QString title_, QString description_,QString value_,bool visible_ = true, bool editable_ = true);

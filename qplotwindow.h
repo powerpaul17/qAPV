@@ -1,8 +1,8 @@
 #ifndef QPLOTWINDOW_H
 #define QPLOTWINDOW_H
 
-#include <QWidget>
-#include <QGraphicsView>
+#include <QtWidgets/QWidget>
+#include <QtWidgets/QGraphicsView>
 
 #include "cplot.h"
 

@@ -1,8 +1,8 @@
 #ifndef WMAINWINDOW_H
 #define WMAINWINDOW_H
 
-#include <QMainWindow>
-#include <QMdiArea>
+//#include <QMdiArea>
+#include <QtWidgets/QMainWindow>
 
 #include "cproject.h"
 #include "qprojecttreemodel.h"

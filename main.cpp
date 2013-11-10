@@ -1,5 +1,6 @@
 #include "wmainwindow.h"
-#include <QApplication>
+//#include <QApplication>
+#include <QtWidgets/QApplication>
 
 int main(int argc, char *argv[])
 {

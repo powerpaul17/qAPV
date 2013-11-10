@@ -1,7 +1,7 @@
 #ifndef QOBJECTPROPERTIESWINDOW_H
 #define QOBJECTPROPERTIESWINDOW_H
 
-#include <QtWidgets>
+#include <QtWidgets/QtWidgets>
 
 #include "cobject.h"
 

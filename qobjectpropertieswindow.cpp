@@ -13,7 +13,6 @@ QObjectPropertiesWindow::~QObjectPropertiesWindow() {
 }
 
 void QObjectPropertiesWindow::slot_objectChanged(CObject* object_) {
-    QFormLayout* newLayout = object_->returnPropertiesWidget(0);
     QLayout* layout = this->layout();
     if (layout != 0) {
         QLayoutItem* item;
@@ -25,5 +24,8 @@ void QObjectPropertiesWindow::slot_objectChanged(CObject* object_) {
         }
         delete this->layout();
     }
-    this->setLayout(newLayout);
+    if(object_ != 0) {
+        QFormLayout* newLayout = object_->returnPropertiesWidget(0);
+        this->setLayout(newLayout);
+    }
 }

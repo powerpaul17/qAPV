@@ -3,10 +3,9 @@
 #include "cplotfactory.h"
 
 CProject::CProject():CObject(0,"Project",0,"Project",true) {
-    currId = 1;
-    changed = false;
-
     addProperty("filename","Filename","Filename",QString(""),false,true);
+    addProperty("changed","Changed?","Project has changed?",false,false,true);
+    addProperty("currId","Current ID","Current ID",qlonglong(1),false,true);
 }
 
 CProject::~CProject() {
@@ -20,13 +19,13 @@ CProject::CProject(QString filename_) {
 }
 
 void CProject::constructFromXML(QXmlStreamReader* xml_) {
+    CObject::constructFromXML(xml_);
+
     CDataSourceFactory dataSourceFactory;
     CPlotFactory plotFactory;
 
-    this->setName(xml_->attributes().value("name").toString());
-    this->currId = xml_->attributes().value("currId").toString().toInt();
     while(xml_->readNextStartElement()) {
-        if(xml_->name()=="DataSource") {
+        if(xml_->name()=="Datasource") {
             CDataSource* newDataSource = dataSourceFactory.createDataSource(xml_->attributes().value("dataSourceType").toString());
             newDataSource->constructFromXML(xml_);
             this->addChild(newDataSource);
@@ -40,59 +39,53 @@ void CProject::constructFromXML(QXmlStreamReader* xml_) {
 }
 
 int CProject::loadProjectFromFile() {
-    QXmlStreamReader* xml = new QXmlStreamReader();
-
+    QDomDocument doc("qAPV");
     QFile file(getStringPropertyValue("filename"));
-    if(file.open(QIODevice::ReadOnly)) {
-        xml->setDevice(&file);
-        if(xml->readNextStartElement()) {
-            if((xml->name()=="qAPV") && (xml->attributes().value("version")=="1.0")) {
-                if(xml->readNextStartElement()) {
-                    if(xml->name()=="Project") {
-                        this->constructFromXML(xml);
-                    } else {
-                        return 3;
-                    }
-                } else {
-                    return 2;
-                }
-            } else {
-                return 3;
-            }
-        } else {
-            return 2;
-        }
+    if(!file.open(QIODevice::ReadOnly)) {
+        return -1;
+    }
+    if(!doc.setContent(&file)) {
         file.close();
-        setChanged(false);
-    } else {
-        return 1;
+        return -2;
+    }
+    file.close();
+
+    QDomElement rootNode = doc.documentElement();
+    if(rootNode.tagName() != "qAPV") {
+        return -3;
     }
 
-    delete xml;
+    QDomNode node = rootNode.firstChild();
+    while(!node.isNull()) {
+        QDomElement element = node.toElement();
+        if(!element.isNull()) {
+            if(element.tagName() == "Project") {
+
+            }
+        }
+        node = node.nextSibling();
+    }
+
     return 0;
 }
 
 void CProject::saveProjectToFile() {
-    QXmlStreamWriter* xml = new QXmlStreamWriter();
-    xml->setAutoFormatting(true);
+    QDomDocument doc("qAPV");
+    QDomElement rootNode = doc.createElement("qAPV");
+
+    exportToXML(&doc,&rootNode);
+
+    doc.appendChild(rootNode);
 
     QFile file(getStringPropertyValue("filename"));
     if(file.open(QIODevice::WriteOnly)) {
-        xml->setDevice(&file);
-        xml->writeStartDocument();
-        xml->writeDTD("<!DOCTYPE qAPV>");
-        xml->writeStartElement("qAPV");
-            xml->writeAttribute("version","1.0");
-        exportToXML(xml);
-        xml->writeEndDocument();
-
+        QTextStream textStream(&file);
+        textStream << doc.toString();
         file.close();
         setChanged(false);
     } else {
         // TODO
     }
-
-    delete xml;
 }
 
 QString CProject::getFilename() {
@@ -104,11 +97,11 @@ void CProject::setFilename(QString filename_) {
 }
 
 bool CProject::isChanged() {
-    return changed;
+    return getBoolPropertyValue("changed");
 }
 
 void CProject::setChanged(bool changed_) {
-    changed = changed_;
+    setPropertyValue("changed",changed_);
     //emit projectChanged();
 }
 

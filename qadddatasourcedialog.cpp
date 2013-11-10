@@ -1,7 +1,7 @@
 #include "qadddatasourcedialog.h"
 #include "ui_qadddatasourcedialog.h"
 
-#include <QMessageBox>
+#include <QtWidgets/QMessageBox>
 
 QAddDataSourceDialog::QAddDataSourceDialog(QWidget *parent) :
     QDialog(parent),

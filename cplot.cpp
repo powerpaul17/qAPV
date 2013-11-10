@@ -1,7 +1,7 @@
 #include "cplot.h"
 
 CPlot::CPlot(QString plotType_):CObject(0,"Plot") {
-    addProperty("plottype","Plot Type","Plot Type",plotType_,true,false);
+    addProperty("plottype","Plot Type","Plot Type",plotType_,false,false);
 
     m_dataSeries.clear();
 }

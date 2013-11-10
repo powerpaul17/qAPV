@@ -1,5 +1,5 @@
 #include <QtUiTools>
-#include <QtWidgets>
+#include <QtWidgets/QtWidgets>
 
 #include "c2dplot.h"
 
